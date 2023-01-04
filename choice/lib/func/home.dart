@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   static const String _title = 'Flutter Code Sample';
 
@@ -34,14 +34,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
+    final standardDeviceHeight = 900;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     '',
+      //     style: TextStyle(color: Colors.black),
+      //   ),
+      //   backgroundColor: Colors.white,
+      // ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,34 +71,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 185,
+                      height: 180 * ( deviceHeight / standardDeviceHeight),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image(
-                            image: AssetImage('assets/images/1.png'),
-                          ),
-                          Image(
-                            image: AssetImage('assets/images/2.png'),
-                          ),
+                          Image.asset('assets/images/1.png', fit: BoxFit.fill),
+                          Image.asset('assets/images/2.png', fit: BoxFit.fill),
                         ],
 
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 20 * ( deviceHeight / standardDeviceHeight),
                     ),
                     SizedBox(
-                      height: 185,
+                      height: 180 * ( deviceHeight / standardDeviceHeight),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image(
-                            image: AssetImage('assets/images/4.png'),
-                          ),
-                          Image(
-                            image: AssetImage('assets/images/3.png'),
-                          ),
+                          Image.asset('assets/images/3.png', fit: BoxFit.fill),
+                          Image.asset('assets/images/4.png', fit: BoxFit.fill),
                         ],
 
                       ),
