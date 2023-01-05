@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../question/1.dart';
-import 'like.dart';
-import 'list.dart';
-class Home extends StatelessWidget {
-  const Home({super.key});
+
+import '../func/home.dart';
+import '../func/list.dart';
+
+class Question1 extends StatelessWidget {
+  const Question1({super.key});
 
   static const String _title = 'Flutter Code Sample';
 
@@ -25,31 +26,30 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(),Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(),Home(), Home()];
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
+    final deviceWidth = MediaQuery.of(context).size.width;
+    final standardDeviceWidth = 410;
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Container(
                 color: Colors.white,
                 child: Center(
-                  child: Text('CHOICE!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center),
+                  child: Image.asset(
+                    'assets/images/bar1.png',
+                    width: 350 * ( deviceWidth / standardDeviceWidth),
+                  ),
                 ),
               ),
             ),
@@ -61,26 +61,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 180 * ( deviceHeight / standardDeviceHeight),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset('assets/images/1.png', fit: BoxFit.fill),
-                          Image.asset('assets/images/2.png', fit: BoxFit.fill),
-                        ],
-
+                      height: 120 * ( deviceHeight / standardDeviceHeight),
+                      child: Text('2. 체육에 관심이 있으신가요?',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center
                       ),
                     ),
                     SizedBox(
-                      height: 20 * ( deviceHeight / standardDeviceHeight),
-                    ),
-                    SizedBox(
                       height: 180 * ( deviceHeight / standardDeviceHeight),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image.asset('assets/images/3.png', fit: BoxFit.fill),
-                          Image.asset('assets/images/4.png', fit: BoxFit.fill),
+                          InkWell(
+                            child: Image.asset('assets/images/1.png', fit: BoxFit.fill),
+                          ),
+                          InkWell(
+                            child: Image.asset('assets/images/2.png', fit: BoxFit.fill),
+                          ),
                         ],
 
                       ),
@@ -89,39 +90,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 50,
-                    vertical: 50
-                ),
-                color: Colors.white,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder( //to set border radius to button
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
-                    side: const BorderSide(
-                      width: 3.0, color: Colors.black,
-                    ),
-                    minimumSize: const Size(380, 50),
-                  ),
-                  child: Text('테스트 시작하기',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
 
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Question1()),
-                    );
-                  },
-                ),
-              ),
-            )
           ],
         ),
       ),

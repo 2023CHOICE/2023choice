@@ -1,28 +1,29 @@
+import 'package:choice/func/like.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'like.dart';
+import 'list.dart';
 
-class Listview extends StatelessWidget {
-  const Listview({Key? key}) : super(key: key);
+class Like extends StatelessWidget {
+  const Like({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: ListViewPage(),
+      home: LikePage(),
     );
   }
 }
 
-class ListViewPage extends StatefulWidget {
-  const ListViewPage({Key? key}) : super(key: key);
+class LikePage extends StatefulWidget {
+  const LikePage({Key? key}) : super(key: key);
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<LikePage> createState() => _LikePageState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
-  int current_index =1;
-  final List<Widget> _children = [Home(), Listview(),Like(), Home()];
+class _LikePageState extends State<LikePage> {
+  int current_index = 2;
+  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -186,55 +187,28 @@ class _ListViewPageState extends State<ListViewPage> {
 
     double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xffB9CAFE),
+        toolbarHeight: 100,
+        title: Text('CHOICE!',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 40,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(100),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                color: Colors.white,
-                child: TextField(
-                  onChanged: (value) {
-                    var dummySearchList = <String>[];
-                    dummySearchList.addAll(titleList);
-                    if (value.isNotEmpty) {
-                      var dummyListData = <String>[];
-                      dummySearchList.forEach((item) {
-                        if (item.contains(value)) {
-                          dummyListData.add(item);
-                          print(item);
-                        }
-                      });
-                      setState(() {
-                        items.clear();
-                        items.addAll(dummyListData);
-                      });
-                      return;
-                    }
-                    else {
-                      setState(() {
-                        items.clear();
-                        items.addAll(titleList);
-                      });
-                    }
-                  },
-                  decoration: new InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    labelText: 'search',
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    filled: true,
-                    fillColor: Color(0xffF5F5F5),
-                  ),
-                ),
-              ),
-            ),
+            SizedBox(
+                height: 20 * (deviceHeight / standardDeviceHeight)),
             Expanded(
               flex: 9,
               child: Container(
@@ -280,7 +254,6 @@ class _ListViewPageState extends State<ListViewPage> {
                                               color: Colors.black),
                                         ),
                                       ),
-
                                       SizedBox(
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
