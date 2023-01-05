@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'list.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -22,15 +22,10 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
+  int current_index = 0;
+  final List<Widget> _children = [Home(), Listview(),Home(), Home()];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +127,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
+        currentIndex: current_index,
+        onTap: (index) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _children[index]),
+          );
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -154,9 +157,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.black,
           ),
         ],
-        currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+
       ),
     );
   }

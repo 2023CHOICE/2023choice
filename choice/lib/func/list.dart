@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class Listview extends StatelessWidget {
   const Listview({Key? key}) : super(key: key);
@@ -19,15 +20,10 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
-  int _selectedIndex = 0;
+  int current_index =1;
+  final List<Widget> _children = [Home(), Listview(),Home(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   var titleList = [
     '슬기짜기',
@@ -53,25 +49,53 @@ class _ListViewPageState extends State<ListViewPage> {
     '# 동아리'
   ];
 
+  var detail = [
+    '전산분과 프로젝트 동아리'
+  ];
+
+  var desc1 = [
+    '- 학관 2층에 위치하고 있습니다.'
+  ];
+  var desc2 = [
+    '- 매주 월요일 7~8시에 정모가 있습니다.'
+  ];
+  var desc3 = [
+    '- 필수 학기는 2학기입니다.'
+  ];
+
   var imageList = ['assets/images/1.png'];
 
   var likeList = [];
 
   get trailing => null;
 
+  var items = <String>[];
 
-  void showPopup(context, title, image, description) {
+  @override
+  void initState() {
+    items.addAll(titleList);
+    super.initState();
+  }
+
+  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30)),
           child: Container(
             width: MediaQuery
                 .of(context)
                 .size
-                .width * 0.7,
-            height: 200,
+                .width * 1.0,
+            height: 220,
             decoration: BoxDecoration(
+                border: Border.all(
+                    color: Colors.black,
+                    width: 1.0,
+                    style: BorderStyle.solid
+                ),
                 borderRadius: BorderRadius.circular(30), color: Colors.white),
             child: Column(
               children: [
@@ -84,14 +108,52 @@ class _ListViewPageState extends State<ListViewPage> {
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
+                  textAlign: TextAlign.left,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    description,
+                    detail,
                     maxLines: 3,
                     style: TextStyle(fontSize: 15, color: Colors.grey[500]),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 60,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            desc1,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                //fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            desc2,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                //fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            desc3,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                //fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
                 IconButton(
@@ -114,10 +176,13 @@ class _ListViewPageState extends State<ListViewPage> {
     bool selected = true;
     Icon first_icon = Icon(Icons.favorite_border);
     Icon second_icon = Icon(Icons.favorite);
+
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
+
     final deviceWidth = MediaQuery.of(context).size.width;
-    final standardDeviceWidth = 400;
+    final standardDeviceWidth = 410;
+
     double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
       body: SafeArea(
@@ -130,16 +195,41 @@ class _ListViewPageState extends State<ListViewPage> {
                 padding: EdgeInsets.all(10),
                 color: Colors.white,
                 child: TextField(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    var dummySearchList = <String>[];
+                    dummySearchList.addAll(titleList);
+                    if (value.isNotEmpty) {
+                      var dummyListData = <String>[];
+                      dummySearchList.forEach((item) {
+                        if (item.contains(value)) {
+                          dummyListData.add(item);
+                          print(item);
+                        }
+                      });
+                      setState(() {
+                        items.clear();
+                        items.addAll(dummyListData);
+                      });
+                      return;
+                    }
+                    else {
+                      setState(() {
+                        items.clear();
+                        items.addAll(titleList);
+                      });
+                    }
+                  },
                   decoration: new InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     labelText: 'search',
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                     ),
+                    filled: true,
+                    fillColor: Color(0xffF5F5F5),
                   ),
                 ),
               ),
@@ -155,7 +245,7 @@ class _ListViewPageState extends State<ListViewPage> {
                       onTap: () {
                         debugPrint(titleList[index]);
                         showPopup(context, titleList[index], imageList[index],
-                            description[index]);
+                            description[index], detail[index], desc1[index], desc2[index], desc3[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
@@ -164,28 +254,23 @@ class _ListViewPageState extends State<ListViewPage> {
                             color: Theme.of(context).colorScheme.outline,
                           ),
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
+                          const BorderRadius.all(Radius.circular(20)),
                         ),
                         child: Row(
                           children: [
                             SizedBox(
-                                height:
-                                    50 * (deviceHeight / standardDeviceHeight),
-                                width:
-                                    30 * (deviceWidth / standardDeviceWidth)),
+                                height: 50 * (deviceHeight / standardDeviceHeight),
+                                width: 30 * (deviceWidth / standardDeviceWidth)),
                             Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                      height: 10 *
-                                          (deviceHeight /
-                                              standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)),
                                   Row(
                                     children: [
                                       SizedBox(
-                                        width: 120 *
-                                            (deviceWidth / standardDeviceWidth),
+                                        width: 120 * (deviceWidth / standardDeviceWidth),
                                         child: Text(
                                           titleList[index],
                                           style: const TextStyle(
@@ -196,8 +281,7 @@ class _ListViewPageState extends State<ListViewPage> {
                                       ),
 
                                       SizedBox(
-                                        width: 70 *
-                                            (deviceWidth / standardDeviceWidth),
+                                        width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
                                             description[index],
@@ -211,14 +295,12 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffFEF0E3),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                            borderRadius: BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 70 *
-                                            (deviceWidth / standardDeviceWidth),
+                                        width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
                                             description[index],
@@ -232,17 +314,12 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffE7FAF7),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                            borderRadius: BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
-
-                                      // color: Color(0xffFEF0E3) //주황 배경
-                                      // color: Color(0xffE7FAF7) //초록 배경
                                       SizedBox(
-                                        width: 35 *
-                                            (deviceWidth / standardDeviceWidth),
+                                        width: 35 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
                                           icon: selected
@@ -261,9 +338,7 @@ class _ListViewPageState extends State<ListViewPage> {
                                     ],
                                   ),
                                   SizedBox(
-                                      height: 10 *
-                                          (deviceHeight /
-                                              standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)),
                                 ], //children
                               ),
                             ),
@@ -278,7 +353,16 @@ class _ListViewPageState extends State<ListViewPage> {
           ],
         ),
       ),
+
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
+        currentIndex: current_index,
+        onTap: (index) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _children[index]),
+          );
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -301,70 +385,11 @@ class _ListViewPageState extends State<ListViewPage> {
             backgroundColor: Colors.black,
           ),
         ],
-        currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
       ),
     );
   }
 }
 
-class Search extends SearchDelegate {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return <Widget>[
-      IconButton(
-        icon: Icon(Icons.close),
-        onPressed: () {
-          query = "";
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-  }
-
-  String selectedResult = "";
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(selectedResult),
-      ),
-    );
-  }
-
-  final List<String> listExample;
-
-  Search(this.listExample);
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
-
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
-          onTap: () {
-            selectedResult = suggestionList[index];
-            showResults(context);
-          },
-        );
-      },
-    );
-  }
-}
