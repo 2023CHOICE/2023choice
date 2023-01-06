@@ -67,6 +67,18 @@ flutter:
   - assets/images/3.png
   - assets/images/4.png
   - assets/images/bar1.png
+  - assets/images/bar2.png
+  - assets/images/bar3.png
+  - assets/images/bar4.png
+  - assets/images/bar5.png
+  - assets/images/bar6.png
+  - assets/images/bar7.png
+  - assets/images/bar8.png
+  - assets/images/bar9.png
+  - assets/images/bar10.png
+  - assets/images/bar11.png
+  - assets/images/bar12.png
+  - assets/images/left.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
