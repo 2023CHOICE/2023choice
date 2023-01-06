@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import '../question/1.dart';
 import 'like.dart';
 import 'list.dart';
@@ -65,8 +66,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image.asset('assets/images/1.png', fit: BoxFit.fill),
-                          Image.asset('assets/images/2.png', fit: BoxFit.fill),
+                          Character(),
+                          Character(),
                         ],
 
                       ),
@@ -79,8 +80,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image.asset('assets/images/3.png', fit: BoxFit.fill),
-                          Image.asset('assets/images/4.png', fit: BoxFit.fill),
+                          Character(),
+                          Character(),
                         ],
 
                       ),
@@ -161,6 +162,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
 
+      ),
+    );
+  }
+}
+
+class Character extends StatefulWidget {
+  @override
+  _CharacterState createState() => _CharacterState();
+}
+
+class _CharacterState extends State<Character> {
+  int characterNumber = Random().nextInt(4) + 1;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            characterNumber = Random().nextInt(4) + 1;
+            print('I got clicked: $characterNumber');
+          });
+        },
+        child: Image.asset('assets/images/$characterNumber.png'),
       ),
     );
   }
