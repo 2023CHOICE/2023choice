@@ -26,7 +26,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(),Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -96,8 +96,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         currentIndex: current_index,
+        backgroundColor: Colors.black,
         onTap: (index) {
           Navigator.push(
             context,
@@ -126,7 +127,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.black,
           ),
         ],
-        selectedItemColor: Colors.white,
+        selectedItemColor: Colors.grey,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
 

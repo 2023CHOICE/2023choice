@@ -329,8 +329,9 @@ class _LikePageState extends State<LikePage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         currentIndex: current_index,
+        backgroundColor: Colors.black,
         onTap: (index) {
           Navigator.push(
             context,

@@ -126,8 +126,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         currentIndex: current_index,
+        backgroundColor: Colors.black,
         onTap: (index) {
           Navigator.push(
             context,
