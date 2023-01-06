@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../func/home.dart';
 import '../func/list.dart';
+import '2.dart';
 
 class Question1 extends StatelessWidget {
   const Question1({super.key});
@@ -36,6 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     final standardDeviceHeight = 900;
     final deviceWidth = MediaQuery.of(context).size.width;
     final standardDeviceWidth = 410;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -43,13 +45,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: <Widget>[
             Expanded(
               flex: 4,
-              child: Container(
-                color: Colors.white,
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/bar1.png',
-                    width: 350 * ( deviceWidth / standardDeviceWidth),
-                  ),
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 30
+                            ),
+                            icon: Image.asset('assets/images/left.png'),
+                            iconSize: 30,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    SizedBox(
+                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      child: Center(
+                        child: Image.asset(
+                          'assets/images/bar1.png',
+                          height: 50 * ( deviceWidth / standardDeviceWidth),
+                          width: 350 * ( deviceWidth / standardDeviceWidth),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -77,21 +113,36 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           InkWell(
-                            child: Image.asset('assets/images/1.png', fit: BoxFit.fill),
-
+                            child: IconButton(
+                              icon: Image.asset('assets/images/1.png'),
+                              iconSize: 160,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Question2()),
+                                );
+                              },
+                            )
                           ),
                           InkWell(
-                            child: Image.asset('assets/images/2.png', fit: BoxFit.fill),
+                            child: IconButton(
+                              icon: Image.asset('assets/images/2.png'),
+                              iconSize: 160,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Question2()),
+                                );
+                              },
+                            )
                           ),
                         ],
-
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -130,7 +181,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         selectedItemColor: Colors.grey,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-
       ),
     );
   }

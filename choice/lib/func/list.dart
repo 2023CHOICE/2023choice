@@ -21,7 +21,8 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
-  int current_index =1;
+  List<String> saved = [];
+  int current_index = 1;
   final List<Widget> _children = [Home(), Listview(),Like(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -186,55 +187,30 @@ class _ListViewPageState extends State<ListViewPage> {
 
     double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        actions: <Widget>[
+          IconButton(
+            iconSize: 25,
+            icon: Icon(Icons.search, color: Colors.black),
+            onPressed: () {
+              showSearch(context: context, delegate: Search(titleList));
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                color: Colors.white,
-                child: TextField(
-                  onChanged: (value) {
-                    var dummySearchList = <String>[];
-                    dummySearchList.addAll(titleList);
-                    if (value.isNotEmpty) {
-                      var dummyListData = <String>[];
-                      dummySearchList.forEach((item) {
-                        if (item.contains(value)) {
-                          dummyListData.add(item);
-                          print(item);
-                        }
-                      });
-                      setState(() {
-                        items.clear();
-                        items.addAll(dummyListData);
-                      });
-                      return;
-                    }
-                    else {
-                      setState(() {
-                        items.clear();
-                        items.addAll(titleList);
-                      });
-                    }
-                  },
-                  decoration: new InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    labelText: 'search',
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    filled: true,
-                    fillColor: Color(0xffF5F5F5),
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               flex: 9,
               child: Container(
@@ -242,6 +218,7 @@ class _ListViewPageState extends State<ListViewPage> {
                 child: ListView.builder(
                   itemCount: titleList.length,
                   itemBuilder: (context, index) {
+                    final alreadySaved = saved.contains(titleList[index]);
                     return InkWell(
                       onTap: () {
                         debugPrint(titleList[index]);
@@ -323,19 +300,26 @@ class _ListViewPageState extends State<ListViewPage> {
                                         width: 35 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
-                                          icon: selected
-                                              ? first_icon
-                                              : second_icon,
-                                          onPressed: () {
-                                            try {
-                                              // your code that you want this IconButton do
-                                              setState(() {
-                                                selected  = !selected;
-                                              });
-                                            } catch(e) {
-                                              print(e);
+                                        icon: Icon(
+                                          alreadySaved
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color:
+                                          alreadySaved ? Colors.red : null,
+                                          semanticLabel: alreadySaved
+                                              ? 'Remove from saved'
+                                              : 'Save',
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            if (alreadySaved) {
+                                              saved.remove(titleList[index]);
+                                            } else {
+                                              saved.add(titleList[index]);
                                             }
-                                          }),
+                                          });
+                                        },
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
@@ -391,6 +375,73 @@ class _ListViewPageState extends State<ListViewPage> {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
       ),
+    );
+  }
+}
+
+class Search extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = "";
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  String selectedResult = "";
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectedResult),
+      ),
+    );
+  }
+
+  final List<String> listExample;
+
+  Search(this.listExample);
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestionList = [];
+
+    query.isEmpty
+        ? suggestionList = [] //In the true case
+        : suggestionList.addAll(listExample.where(
+          (element) => element.contains(query),
+    ));
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(
+            suggestionList[index],
+          ),
+          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
+          onTap: () {
+            selectedResult = suggestionList[index];
+
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }
