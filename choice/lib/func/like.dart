@@ -175,7 +175,7 @@ class _LikePageState extends State<LikePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool selected = true;
+    bool selected = false;
     Icon first_icon = Icon(Icons.favorite_border);
     Icon second_icon = Icon(Icons.favorite);
 
@@ -299,6 +299,7 @@ class _LikePageState extends State<LikePage> {
                                           icon: selected
                                               ? first_icon
                                               : second_icon,
+                                          color: Colors.red,
                                           onPressed: () {
                                             try {
                                               // your code that you want this IconButton do
