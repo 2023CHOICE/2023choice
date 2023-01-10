@@ -173,14 +173,14 @@ class Character extends StatefulWidget {
 }
 
 class _CharacterState extends State<Character> {
-  int characterNumber = Random().nextInt(4) + 1;
+  int characterNumber = Random().nextInt(16) + 1;
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
         onPressed: () {
           setState(() {
-            characterNumber = Random().nextInt(4) + 1;
+            characterNumber = Random().nextInt(16) + 1;
             print('I got clicked: $characterNumber');
           });
         },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../func/home.dart';
 import '../func/list.dart';
+import '../result/WUYB.dart';
 import '11.dart';
 
 class Question12 extends StatelessWidget {
@@ -114,7 +115,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           InkWell(
                               child: IconButton(
-                                icon: Image.asset('assets/images/1.png'),
+                                icon: Image.asset('assets/images/answer/yes.png'),
                                 iconSize: 160,
                                 onPressed: () {
                                   Navigator.push(
@@ -126,12 +127,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           ),
                           InkWell(
                               child: IconButton(
-                                icon: Image.asset('assets/images/2.png'),
+                                icon: Image.asset('assets/images/answer/no.png'),
                                 iconSize: 160,
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question12()),
+                                    MaterialPageRoute(builder: (context) => WUYB()),
                                   );
                                 },
                               )
