@@ -41,12 +41,39 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         builder: (BuildContext context, AsyncSnapshot snapshot){
           return Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    padding:EdgeInsets.fromLTRB(300, 50, 10, 0),
+                    color: Colors.white,
+                    height: 1.0,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder( //to set border radius to button
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        minimumSize: const Size(20, 20),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black45,
+                        side: const BorderSide(
+                          width: 2.0, color: Colors.black45,
+                        ),
+                      ),
+                      child: Text('logout',
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                      },
+                    ),
+                  ),
+                ),
                 Expanded(
                   flex: 2,
                   child: Container(
-                    padding:EdgeInsets.fromLTRB(0, 150, 0, 0),
+                    padding:EdgeInsets.fromLTRB(0, 70, 0, 0),
                     color: Colors.white,
                     child: Center(
                       child: Column(
@@ -72,9 +99,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ),
                 Expanded(
-                  flex: 4,
+                  flex: 6,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(10, 60, 10, 10),
+                    padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
                     color: Colors.white,
                     child: Column(
                       children: [
@@ -106,11 +133,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50,
-                        vertical: 85
+                        vertical: 20,
                     ),
                     color: Colors.white,
                     child: ElevatedButton(
@@ -123,7 +150,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         side: const BorderSide(
                           width: 3.0, color: Colors.black,
                         ),
-                        minimumSize: const Size(380, 50),
+                        minimumSize: const Size(380, 30),
                       ),
                       child: Text('테스트 시작하기',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -137,11 +164,57 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       },
                     ),
                   ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 50,
+                      vertical: 20,
+                    ),
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),
           );
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: current_index,
+        backgroundColor: Colors.black,
+        onTap: (index) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _children[index]),
+          );
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '홈',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: '리스트',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: '찜',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: '프로필',
+            backgroundColor: Colors.black,
+          ),
+        ],
+        selectedItemColor: Colors.grey,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
       ),
     );
   }

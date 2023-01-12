@@ -19,30 +19,6 @@ class Loginhome extends StatelessWidget {
           }
           else {
             return Home();
-            //   Center(
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text("${snapshot.data?.displayName}님 반갑습니다:D", style: TextStyle(fontWeight: FontWeight.bold),),
-            //       SizedBox(height: 20,),
-            //       TextButton(
-            //         child: Text('로그아웃', style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold),),
-            //         onPressed: () {
-            //           FirebaseAuth.instance.signOut();
-            //         },
-            //       ),
-            //       TextButton(
-            //         child: Text('시작하기', style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold),),
-            //
-            //         onPressed: () {
-            //           Navigator.of(context).push(MaterialPageRoute(
-            //               builder: (BuildContext context) => Home()));
-            //         },
-            //       ),
-            //       Text('초기 로그인 시, 프로필 설정 부탁드립니다!', style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold),),
-            //     ],
-            //   ),
-            // );
           }
         },
       ),
