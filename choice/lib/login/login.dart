@@ -26,19 +26,48 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceHeight = MediaQuery.of(context).size.height;
+    final standardDeviceHeight = 900;
+    final deviceWidth = MediaQuery.of(context).size.width;
+    final standardDeviceWidth = 410;
+
     return Scaffold(
-      appBar: AppBar(
-        title:  Text("SNS Login"),
-      ),
       body:  Center(
         child: Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
-              style: TextButton.styleFrom(primary: Colors.grey.withOpacity(0.3),),
-              child: Text("Google Login"),
+            Container(
+              // color: Colors.white,
+              child: Center(
+                child: Text('Choice Login',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 100 * ( deviceHeight / standardDeviceHeight),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder( //to set border radius to button
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                // side: const BorderSide(
+                //   width: 3.0, color: Colors.black,
+                // ),
+              ),
+              child: Image.asset(
+                'assets/images/google.png',
+                height: 50 * ( deviceWidth / standardDeviceWidth),
+                width: 250 * ( deviceWidth / standardDeviceWidth),
+              ),
               onPressed: signInWithGoogle,
-            )
+            ),
+            SizedBox(
+              height: 70 * ( deviceHeight / standardDeviceHeight),
+            ),
           ],
         ),
       ),
