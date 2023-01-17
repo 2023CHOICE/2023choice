@@ -136,8 +136,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   flex: 1,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 50,
-                        vertical: 20,
+                      horizontal: 50,
+                      vertical: 20,
                     ),
                     color: Colors.white,
                     child: ElevatedButton(
@@ -212,7 +212,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.black,
           ),
         ],
-        selectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
       ),

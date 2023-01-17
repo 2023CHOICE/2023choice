@@ -1,4 +1,5 @@
 import 'package:choice/func/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,11 @@ class Loginhome extends StatelessWidget {
             return Login();
           }
           else {
+            final userCollectionReference = FirebaseFirestore.instance.collection("users").doc(snapshot.data?.displayName);
+            userCollectionReference.set({
+              "userName" : snapshot.data?.displayName,
+              "age" : 23,
+            });
             return Home();
           }
         },
