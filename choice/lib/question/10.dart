@@ -99,7 +99,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('10. 무대 위에서 자신을 뽐내는 것을 좋아하시나요?',
+                      child: Text('10. 무대 위에서 자신을 뽐내는 \n것을 좋아하시나요?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 30,

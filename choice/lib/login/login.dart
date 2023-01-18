@@ -40,7 +40,7 @@ class Login extends StatelessWidget {
               // color: Colors.white,
               child: Center(
                 child: Text('Choice Login',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -54,9 +54,9 @@ class Login extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
-                // side: const BorderSide(
-                //   width: 3.0, color: Colors.black,
-                // ),
+                side: const BorderSide(
+                  width: 3.0, color: Colors.black12,
+                ),
               ),
               child: Image.asset(
                 'assets/images/google.png',

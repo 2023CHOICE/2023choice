@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'like.dart';
@@ -7,6 +8,7 @@ class Listview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return const MaterialApp(
       home: ListViewPage(),
     );
@@ -20,36 +22,33 @@ class ListViewPage extends StatefulWidget {
   State<ListViewPage> createState() => _ListViewPageState();
 }
 
+final List<String> titleList = [];
+final List<String> description = [];
+
 class _ListViewPageState extends State<ListViewPage> {
   List<String> saved = [];
+
   int current_index = 1;
-  final List<Widget> _children = [Home(), Listview(),Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  var titleList = [
-    '슬기짜기',
-    '팔레트',
-    '하향',
-    '소울',
-    '한검',
-    'CCC',
-    'DFC',
-    'H-Millan',
-    '오케스트라'
-  ];
+  CollectionReference _collectionRef = FirebaseFirestore.instance.collection(
+      'lists');
 
-  var description = [
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리'
-  ];
+  Future<void> getData() async {
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+    FirebaseFirestore.instance.collection("lists").snapshots().listen((
+        snapshots) async {
+      for (var doc in snapshots.docs) {
+        // saved.add(doc.get('result'));
+        titleList.add(doc.id);
+        description.add(doc.get('result'));
+      }
+      print(titleList);
+      print(description);
+    });
+  }
 
   var detail = [
     '전산분과 프로젝트 동아리'
@@ -71,15 +70,8 @@ class _ListViewPageState extends State<ListViewPage> {
 
   get trailing => null;
 
-  var items = <String>[];
-
-  @override
-  void initState() {
-    items.addAll(titleList);
-    super.initState();
-  }
-
-  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
+  void showPopup(context, title, image, description, detail, String desc1,
+      String desc2, String desc3) {
     showDialog(
       context: context,
       builder: (context) {
@@ -173,19 +165,31 @@ class _ListViewPageState extends State<ListViewPage> {
     );
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
+    if (titleList.isEmpty) getData();
     bool selected = true;
     Icon first_icon = Icon(Icons.favorite_border);
     Icon second_icon = Icon(Icons.favorite);
 
-    final deviceHeight = MediaQuery.of(context).size.height;
+    final deviceHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     final standardDeviceHeight = 900;
 
-    final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     final standardDeviceWidth = 410;
 
-    double width = MediaQuery.of(context).size.width * 0.6;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width * 0.6;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -207,7 +211,10 @@ class _ListViewPageState extends State<ListViewPage> {
           ),
         ],
       ),
-      body: SafeArea(
+      body: Scrollbar(
+        controller: _scrollController,
+        isAlwaysShown: true,
+        thickness: 10,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -216,20 +223,31 @@ class _ListViewPageState extends State<ListViewPage> {
               child: Container(
                 color: Colors.white,
                 child: ListView.builder(
+                  controller: _scrollController,
                   itemCount: titleList.length,
                   itemBuilder: (context, index) {
                     final alreadySaved = saved.contains(titleList[index]);
                     return InkWell(
                       onTap: () {
                         debugPrint(titleList[index]);
-                        showPopup(context, titleList[index], imageList[index],
-                            description[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                        showPopup(
+                            context,
+                            titleList[index],
+                            imageList[index],
+                            description[index],
+                            detail[index],
+                            desc1[index],
+                            desc2[index],
+                            desc3[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: Theme.of(context).colorScheme.outline,
+                            color: Theme
+                                .of(context)
+                                .colorScheme
+                                .outline,
                           ),
                           borderRadius:
                           const BorderRadius.all(Radius.circular(20)),
@@ -237,18 +255,22 @@ class _ListViewPageState extends State<ListViewPage> {
                         child: Row(
                           children: [
                             SizedBox(
-                                height: 50 * (deviceHeight / standardDeviceHeight),
-                                width: 30 * (deviceWidth / standardDeviceWidth)),
+                                height: 50 *
+                                    (deviceHeight / standardDeviceHeight),
+                                width: 30 *
+                                    (deviceWidth / standardDeviceWidth)),
                             Padding(
                               padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
+                                      height: 10 * (deviceHeight /
+                                          standardDeviceHeight)),
                                   Row(
                                     children: [
                                       SizedBox(
-                                        width: 120 * (deviceWidth / standardDeviceWidth),
+                                        width: 120 * (deviceWidth /
+                                            standardDeviceWidth),
                                         child: Text(
                                           titleList[index],
                                           style: const TextStyle(
@@ -259,7 +281,8 @@ class _ListViewPageState extends State<ListViewPage> {
                                       ),
 
                                       SizedBox(
-                                        width: 70 * (deviceWidth / standardDeviceWidth),
+                                        width: 70 * (deviceWidth /
+                                            standardDeviceWidth),
                                         child: Container(
                                           child: Text(
                                             description[index],
@@ -273,12 +296,14 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffFEF0E3),
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderRadius: BorderRadius
+                                                .circular(20),
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 70 * (deviceWidth / standardDeviceWidth),
+                                        width: 70 * (deviceWidth /
+                                            standardDeviceWidth),
                                         child: Container(
                                           child: Text(
                                             description[index],
@@ -292,12 +317,14 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffE7FAF7),
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderRadius: BorderRadius
+                                                .circular(20),
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 35 * (deviceWidth / standardDeviceWidth),
+                                        width: 35 * (deviceWidth /
+                                            standardDeviceWidth),
                                       ),
                                       IconButton(
                                         icon: Icon(
@@ -323,7 +350,9 @@ class _ListViewPageState extends State<ListViewPage> {
                                     ],
                                   ),
                                   SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
+                                      height: 10 * (deviceHeight /
+                                          standardDeviceHeight)
+                                  ),
                                 ], //children
                               ),
                             ),
@@ -521,18 +550,6 @@ class Search extends SearchDelegate {
     final deviceWidth = MediaQuery.of(context).size.width;
     final standardDeviceWidth = 410;
 
-    var description = [
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리',
-      '# 동아리'
-    ];
-
     var detail = [
       '전산분과 프로젝트 동아리'
     ];
@@ -663,7 +680,8 @@ class Search extends SearchDelegate {
                           ],
                         ),
                         SizedBox(
-                            height: 10 * (deviceHeight / standardDeviceHeight)),
+                            height: 10 * (deviceHeight / standardDeviceHeight)
+                        ),
                       ], //children
                     ),
                   ),
@@ -676,4 +694,3 @@ class Search extends SearchDelegate {
     );
   }
 }
-
