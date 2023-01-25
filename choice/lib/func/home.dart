@@ -234,7 +234,7 @@ class _CharacterState extends State<Character> {
         onPressed: () {
           setState(() {
             characterNumber = Random().nextInt(16) + 1;
-            print('I got clicked: $characterNumber');
+            // print('I got clicked: $characterNumber');
           });
         },
         child: Image.asset('assets/images/$characterNumber.png'),

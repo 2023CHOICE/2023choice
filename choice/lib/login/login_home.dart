@@ -22,7 +22,6 @@ class Loginhome extends StatelessWidget {
             final userCollectionReference = FirebaseFirestore.instance.collection("users").doc(snapshot.data?.displayName);
             userCollectionReference.set({
               "userName" : snapshot.data?.displayName,
-              "age" : 23,
             });
             return Home();
           }
