@@ -27,30 +27,6 @@ class _LikePageState extends State<LikePage> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  var titleList = [
-    '슬기짜기',
-    '팔레트',
-    '하향',
-    '소울',
-    '한검',
-    'CCC',
-    'DFC',
-    'H-Millan',
-    '오케스트라'
-  ];
-
-  var description = [
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리',
-    '# 동아리'
-  ];
-
   var detail = [
     '전산분과 프로젝트 동아리'
   ];
@@ -75,7 +51,7 @@ class _LikePageState extends State<LikePage> {
 
   @override
   void initState() {
-    items.addAll(titleList);
+    items.addAll(Listview.titleList);
     super.initState();
   }
 
@@ -173,6 +149,8 @@ class _LikePageState extends State<LikePage> {
     );
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     bool selected = false;
@@ -203,7 +181,10 @@ class _LikePageState extends State<LikePage> {
           ),
         ),
       ),
-      body: SafeArea(
+      body: Scrollbar(
+        controller: _scrollController,
+        isAlwaysShown: true,
+        thickness: 10,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -214,13 +195,14 @@ class _LikePageState extends State<LikePage> {
               child: Container(
                 color: Colors.white,
                 child: ListView.builder(
-                  itemCount: titleList.length,
+                  controller: _scrollController,
+                  itemCount: Listview.saved.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        debugPrint(titleList[index]);
-                        showPopup(context, titleList[index], imageList[index],
-                            description[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                        debugPrint(Listview.titleList[index]);
+                        showPopup(context, Listview.titleList[index], imageList[index],
+                            Listview.description1[index], detail[index], desc1[index], desc2[index], desc3[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
@@ -247,7 +229,7 @@ class _LikePageState extends State<LikePage> {
                                       SizedBox(
                                         width: 120 * (deviceWidth / standardDeviceWidth),
                                         child: Text(
-                                          titleList[index],
+                                          Listview.saved[index],
                                           style: const TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
@@ -258,7 +240,7 @@ class _LikePageState extends State<LikePage> {
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            description[index],
+                                            Listview.description1[index],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -277,7 +259,7 @@ class _LikePageState extends State<LikePage> {
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            description[index],
+                                            Listview.description2[index],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -368,4 +350,3 @@ class _LikePageState extends State<LikePage> {
     );
   }
 }
-

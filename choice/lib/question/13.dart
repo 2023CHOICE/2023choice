@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
-import '5.dart';
-import '7.dart';
+import '12.dart';
+import '2.dart';
+import '4.dart';
 
-class Question6 extends StatelessWidget {
-  const Question6({super.key});
+class Question13 extends StatelessWidget {
+  const Question13({super.key});
 
   static const String _title = 'Flutter Code Sample';
 
@@ -55,35 +56,34 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         alignment: Alignment.centerLeft,
                         child: IconButton(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 30
-                          ),
+                              horizontal: 30, vertical: 30),
                           icon: Image.asset('assets/images/left.png'),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Question5()),
+                              MaterialPageRoute(
+                                  builder: (context) => Question12()),
                             );
                           },
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                     Container(
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
-                          'assets/images/bar/bar6.png',
-                          height: 50 * ( deviceWidth / standardDeviceWidth),
-                          width: 350 * ( deviceWidth / standardDeviceWidth),
+                          'assets/images/bar/bar13.png',
+                          height: 50 * (deviceWidth / standardDeviceWidth),
+                          width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                   ],
                 ),
@@ -97,18 +97,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('6. 두 가지 캠프가 열렸다\n시간이 겹쳐 한 가지만 선택해야 할 때\n당신이 선택하고 싶은 캠프는?',
+                      height: 120 * (deviceHeight / standardDeviceHeight),
+                      child: Text('13. 어떤 창작물을 만들었을 때 ?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black,
                           ),
-                          textAlign: TextAlign.center
-                      ),
+                          textAlign: TextAlign.center),
                     ),
                     SizedBox(
-                      height: 220 * ( deviceHeight / standardDeviceHeight),
+                      height: 220 * (deviceHeight / standardDeviceHeight),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -120,27 +119,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     primary: Color(0xffB9CAFE),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
-                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text('평소에 하고 싶었던 봉사캠프',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center
+                                    textStyle: const TextStyle(
+                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                child: Text('나 자신의 보람으로 만족한다',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
                                     ),
-                                  ],
-                                ),
+                                    textAlign: TextAlign.center),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question7()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question4()),
                                   );
                                 },
-                              )
-                          ),
+                              )),
                           InkWell(
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -149,34 +143,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     primary: Color(0xffFF9281),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
-                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text('자신을 성장시킬 수 있는 기회가',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center
+                                    textStyle: const TextStyle(
+                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                child: Text('무조건 다른 사람들에게\n''보여주고 자랑해야 한다',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
                                     ),
-                                    Text('되는 전공 관련 캠프',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center
-                                    ),
-                                  ],
-                                ),
+                                    textAlign: TextAlign.center),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question7()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question4()),
                                   );
                                 },
-                              )
-                          ),
+                              )),
                         ],
                       ),
                     ),

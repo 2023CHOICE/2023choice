@@ -77,7 +77,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
-                          'assets/images/bar10.png',
+                          'assets/images/bar/bar10.png',
                           height: 50 * ( deviceWidth / standardDeviceWidth),
                           width: 350 * ( deviceWidth / standardDeviceWidth),
                         ),
@@ -99,24 +99,46 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('10. 무대 위에서 자신을 뽐내는 \n것을 좋아하시나요?',
+                      child: Text('10. 아응입 또는 소입을 \n배웠을 때 든 당신의 마음은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: 25,
                             color: Colors.black,
                           ),
                           textAlign: TextAlign.center
                       ),
                     ),
                     SizedBox(
-                      height: 180 * ( deviceHeight / standardDeviceHeight),
-                      child: Row(
+                      height: 220 * ( deviceHeight / standardDeviceHeight),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/yes.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffB9CAFE),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('와 이길은 정말 나의 길이 아니다…',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('도망치자',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -126,9 +148,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               )
                           ),
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/no.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffFF9281),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('어렵긴해도 오기가 생기는데?',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('해결하고 싶어진다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,

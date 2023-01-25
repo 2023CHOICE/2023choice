@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../func/home.dart';
 import '../func/list.dart';
 import '1.dart';
@@ -77,7 +76,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
-                          'assets/images/bar2.png',
+                          'assets/images/bar/bar2.png',
                           height: 50 * ( deviceWidth / standardDeviceWidth),
                           width: 350 * ( deviceWidth / standardDeviceWidth),
                         ),
@@ -99,24 +98,46 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('2. 체육에 관심이 있으신가요?',
+                      child: Text('2. 하루 벌어 하루 사는 당신! \n 당신보다 불우한 이웃을 보았을 때의\n당신의 선택은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: 25,
                             color: Colors.black,
                           ),
                           textAlign: TextAlign.center
                       ),
                     ),
                     SizedBox(
-                      height: 180 * ( deviceHeight / standardDeviceHeight),
-                      child: Row(
+                      height: 220 * ( deviceHeight / standardDeviceHeight),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/yes.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffB9CAFE),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('당장의 내 삶이 조금 더',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('힘들어지더라도 돕고 본다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -126,9 +147,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               )
                           ),
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/no.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffFF9281),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('너무 안타깝고 죄송하지만',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('도울 수 없다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
