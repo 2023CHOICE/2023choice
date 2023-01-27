@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
 import '10.dart';
+import '2.dart';
+import '4.dart';
 import '8.dart';
 
 class Question9 extends StatelessWidget {
@@ -77,7 +79,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
-                          'assets/images/bar9.png',
+                          'assets/images/bar/bar9.png',
                           height: 50 * ( deviceWidth / standardDeviceWidth),
                           width: 350 * ( deviceWidth / standardDeviceWidth),
                         ),
@@ -99,25 +101,49 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('9. 동아리를 통해 신앙심을 키우고 싶으신가요?',
+                      child: Text('9. 만약 10대 1로 싸우는 꿈을 꾸었다\n이때 당신이 상대방과 맞서 싸우는\n방식은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: 25,
                             color: Colors.black,
                           ),
                           textAlign: TextAlign.center
                       ),
                     ),
                     SizedBox(
-                      height: 180 * ( deviceHeight / standardDeviceHeight),
-                      child: Row(
+                      height: 290 * ( deviceHeight / standardDeviceHeight),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/yes.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffB9CAFE),
+                                    minimumSize: Size(380, 80),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('자존심이 허락 못한다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('맨몸으로 싸운다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
+                                  Profile.m += 20;
+                                  Profile.body += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question10()),
@@ -126,10 +152,63 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               )
                           ),
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/no.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffFF9281),
+                                    minimumSize: Size(380, 80),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('도구를 이용하여 싸운다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
                                 onPressed: () {
+                                  Profile.m += 20;
+                                  Profile.tool += 10;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Question10()),
+                                  );
+                                },
+                              )
+                          ),
+                          InkWell(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffFFB181),
+                                    minimumSize: Size(380, 80),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text('나는 평화주의자',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('싸우지 않는다',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Profile.w += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question10()),

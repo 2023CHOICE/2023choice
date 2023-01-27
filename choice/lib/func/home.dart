@@ -1,3 +1,5 @@
+import 'package:choice/func/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -27,12 +29,38 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(),Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
+  CollectionReference _collectionRef = FirebaseFirestore.instance.collection('lists');
+
+  Future<void> getData() async {
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    FirebaseFirestore.instance.collection("lists").snapshots().listen((snapshots) async {
+      for(var doc in snapshots.docs){
+        Listview.titleList.add(doc.id);
+        Listview.description1.add(doc.get('result1'));
+        Listview.description2.add(doc.get('result2'));
+      }
+    });
+  }
+  Future<void> setData() async {
+    Profile.m = 0;
+    Profile.w = 0;
+    Profile.v = 0;
+    Profile.u = 0;
+    Profile.h = 0;
+    Profile.y = 0;
+    Profile.d = 0;
+    Profile.b = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
+    if(Listview.titleList.isEmpty && Listview.description1.isEmpty && Listview.description2.isEmpty) getData();
+    setData();
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
     return Scaffold(
@@ -234,10 +262,9 @@ class _CharacterState extends State<Character> {
         onPressed: () {
           setState(() {
             characterNumber = Random().nextInt(16) + 1;
-            // print('I got clicked: $characterNumber');
           });
         },
-        child: Image.asset('assets/images/$characterNumber.png'),
+        child: Image.asset('assets/images/home/$characterNumber.png'),
       ),
     );
   }

@@ -65,37 +65,38 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/images/1.png
-  - assets/images/2.png
-  - assets/images/3.png
-  - assets/images/4.png
-  - assets/images/5.png
-  - assets/images/6.png
-  - assets/images/7.png
-  - assets/images/8.png
-  - assets/images/9.png
-  - assets/images/10.png
-  - assets/images/11.png
-  - assets/images/12.png
-  - assets/images/13.png
-  - assets/images/14.png
-  - assets/images/15.png
-  - assets/images/16.png
+  - assets/images/home/1.png
+  - assets/images/home/2.png
+  - assets/images/home/3.png
+  - assets/images/home/4.png
+  - assets/images/home/5.png
+  - assets/images/home/6.png
+  - assets/images/home/7.png
+  - assets/images/home/8.png
+  - assets/images/home/9.png
+  - assets/images/home/10.png
+  - assets/images/home/11.png
+  - assets/images/home/12.png
+  - assets/images/home/13.png
+  - assets/images/home/14.png
+  - assets/images/home/15.png
+  - assets/images/home/16.png
   - assets/images/answer/no.png
   - assets/images/answer/yes.png
   - assets/images/result/wuyb.png
-  - assets/images/bar1.png
-  - assets/images/bar2.png
-  - assets/images/bar3.png
-  - assets/images/bar4.png
-  - assets/images/bar5.png
-  - assets/images/bar6.png
-  - assets/images/bar7.png
-  - assets/images/bar8.png
-  - assets/images/bar9.png
-  - assets/images/bar10.png
-  - assets/images/bar11.png
-  - assets/images/bar12.png
+  - assets/images/bar/bar1.png
+  - assets/images/bar/bar2.png
+  - assets/images/bar/bar3.png
+  - assets/images/bar/bar4.png
+  - assets/images/bar/bar5.png
+  - assets/images/bar/bar6.png
+  - assets/images/bar/bar7.png
+  - assets/images/bar/bar8.png
+  - assets/images/bar/bar9.png
+  - assets/images/bar/bar10.png
+  - assets/images/bar/bar11.png
+  - assets/images/bar/bar12.png
+  - assets/images/bar/bar13.png
   - assets/images/left.png
   - assets/images/google.png
 

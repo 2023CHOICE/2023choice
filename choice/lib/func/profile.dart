@@ -1,59 +1,97 @@
+import 'dart:math';
+
 import 'package:choice/func/like.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'list.dart';
 
-class Like extends StatelessWidget {
-  const Like({Key? key}) : super(key: key);
+class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
+
+  static int m = 0;
+  static int w = 0;
+  static int v = 0;
+  static int u = 0;
+  static int h = 0;
+  static int y = 0;
+  static int d = 0;
+  static int b = 0;
+
+  static List<dynamic> nlist = [0,0,0,0]; // MUYD, MUHD 일 시 사용
+
+  static int body = 0; // MUYB - 도구X 일 시 사용
+  static int tool = 0; // MUYB - 도구O 일 시 사용
+
+  static int com = 0; // WUYB - 전산 일 시 사용
+  static int study = 0; // WUYB - 전산 외 일 시 사용
+
+  static String mw = '';
+  static String vu = '';
+  static String hy = '';
+  static String db = '';
+
+
+  static String getResult() {
+    if(m>w) mw = 'M';
+    else mw = 'W';
+    if(v>u) vu = 'V';
+    else vu = 'U';
+    if(h>y) hy = 'H';
+    else hy = 'Y';
+    if(d>b) db = 'D';
+    else db = 'B';
+
+    String result = mw+vu+hy+db;
+
+    if(result == 'MUYD' || result == 'MUHD') {
+      int max = nlist[0];
+      for (var element in nlist) {
+        if (element > max) {
+          max = element;
+        }
+      }
+      int maxindex = nlist.indexOf(max);
+      print(maxindex);
+      if(maxindex==0) result += '-춤';
+      else if(maxindex==1) result += '-노래,랩';
+      else if(maxindex==1) result += '-악기';
+      else result += '-밴드';
+    }
+
+    if(result == 'MUYB') {
+      if(body>tool) result += '-도구X';
+      else result += '-도구O';
+    }
+
+    if(result == 'WUYB') {
+      if(com>study) result += '-전산';
+      else result += '-전산 외';
+    }
+
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LikePage(),
+      home: ProfilePage(),
     );
   }
 }
 
-class LikePage extends StatefulWidget {
-  const LikePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<LikePage> createState() => _LikePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _LikePageState extends State<LikePage> {
-  int current_index = 2;
-  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
+class _ProfilePageState extends State<ProfilePage> {
+  int current_index = 3;
+  final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  var detail = [
-    '전산분과 프로젝트 동아리'
-  ];
-
-  var desc1 = [
-    '- 학관 2층에 위치하고 있습니다.'
-  ];
-  var desc2 = [
-    '- 매주 월요일 7~8시에 정모가 있습니다.'
-  ];
-  var desc3 = [
-    '- 필수 학기는 2학기입니다.'
-  ];
-
-  var imageList = ['assets/images/1.png'];
-
-  var likeList = [];
-
-  get trailing => null;
-
-  var items = <String>[];
-
-  @override
-  void initState() {
-    items.addAll(Listview.titleList);
-    super.initState();
-  }
 
   void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
@@ -201,8 +239,6 @@ class _LikePageState extends State<LikePage> {
                     return InkWell(
                       onTap: () {
                         debugPrint(Listview.titleList[index]);
-                        showPopup(context, Listview.titleList[index], imageList[index],
-                            Listview.description1[index], detail[index], desc1[index], desc2[index], desc3[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
 import '2.dart';
 import '4.dart';
 
@@ -32,6 +32,72 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
+  void showPopup(context, title, detail, String desc) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 1.0,
+            height: 220,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: Colors.black, width: 1.0, style: BorderStyle.solid),
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white),
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                  textAlign: TextAlign.left,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    detail,
+                    maxLines: 3,
+                    style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 60,
+                      ),
+                      Text(
+                        desc,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            //fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                    color: Colors.black,
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -56,35 +122,34 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         alignment: Alignment.centerLeft,
                         child: IconButton(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 30
-                          ),
+                              horizontal: 30, vertical: 30),
                           icon: Image.asset('assets/images/left.png'),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Question2()),
+                              MaterialPageRoute(
+                                  builder: (context) => Question2()),
                             );
                           },
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                     Container(
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
-                          'assets/images/bar3.png',
-                          height: 50 * ( deviceWidth / standardDeviceWidth),
-                          width: 350 * ( deviceWidth / standardDeviceWidth),
+                          'assets/images/bar/bar3.png',
+                          height: 50 * (deviceWidth / standardDeviceWidth),
+                          width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                   ],
                 ),
@@ -98,45 +163,92 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('3. 역동적인 활동을 원하시나요?',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.black,
+                      height: 120 * (deviceHeight / standardDeviceHeight),
+                      child: Column(
+                        children: [
+                          Text('3. 당신은 mnt에 소속되기를 원하는가?',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.center),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.red, // foreground
+                              backgroundColor: Colors.white,
+                            ),
+                            child: Text('#mnt?',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 25,
+                                  color: Colors.grey,
+                                ),
+                                textAlign: TextAlign.center),
+                            onPressed: () {
+                              showPopup(context, "MNT란?",
+                                  "Mission And Talent", "한동대학교 문화선교사역단체");
+                            },
                           ),
-                          textAlign: TextAlign.center
+                        ],
                       ),
                     ),
                     SizedBox(
-                      height: 180 * ( deviceHeight / standardDeviceHeight),
-                      child: Row(
+                      height: 220 * (deviceHeight / standardDeviceHeight),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/yes.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffB9CAFE),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(
+                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                child: Text('그렇다',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
+                                    textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.h += 10;
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question4()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question4()),
                                   );
                                 },
-                              )
-                          ),
+                              )),
                           InkWell(
-                              child: IconButton(
-                                icon: Image.asset('assets/images/answer/no.png'),
-                                iconSize: 160,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    primary: Color(0xffFF9281),
+                                    minimumSize: Size(380, 90),
+                                    alignment: Alignment.center,
+                                    textStyle: const TextStyle(
+                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                child: Text('아니다',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
+                                    textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.y += 10;
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question4()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question4()),
                                   );
                                 },
-                              )
-                          ),
+                              )),
                         ],
                       ),
                     ),

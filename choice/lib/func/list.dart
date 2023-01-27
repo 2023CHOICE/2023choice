@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'like.dart';
 
 class Listview extends StatelessWidget {
   const Listview({Key? key}) : super(key: key);
+  static List<String> titleList = [];
+  static List<String> description1 = [];
+  static List<String> description2 = [];
+  static List<String> saved = [];
 
   @override
   Widget build(BuildContext context) {
-
     return const MaterialApp(
       home: ListViewPage(),
     );
@@ -22,33 +26,13 @@ class ListViewPage extends StatefulWidget {
   State<ListViewPage> createState() => _ListViewPageState();
 }
 
-final List<String> titleList = [];
-final List<String> description = [];
-
 class _ListViewPageState extends State<ListViewPage> {
-  List<String> saved = [];
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   int current_index = 1;
+
   final List<Widget> _children = [Home(), Listview(), Like(), Home()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  CollectionReference _collectionRef = FirebaseFirestore.instance.collection(
-      'lists');
-
-  Future<void> getData() async {
-    QuerySnapshot querySnapshot = await _collectionRef.get();
-    FirebaseFirestore.instance.collection("lists").snapshots().listen((
-        snapshots) async {
-      for (var doc in snapshots.docs) {
-        // saved.add(doc.get('result'));
-        titleList.add(doc.id);
-        description.add(doc.get('result'));
-      }
-      print(titleList);
-      print(description);
-    });
-  }
 
   var detail = [
     '전산분과 프로젝트 동아리'
@@ -70,8 +54,7 @@ class _ListViewPageState extends State<ListViewPage> {
 
   get trailing => null;
 
-  void showPopup(context, title, image, description, detail, String desc1,
-      String desc2, String desc3) {
+  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
       context: context,
       builder: (context) {
@@ -169,27 +152,16 @@ class _ListViewPageState extends State<ListViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (titleList.isEmpty) getData();
-    bool selected = true;
     Icon first_icon = Icon(Icons.favorite_border);
     Icon second_icon = Icon(Icons.favorite);
 
-    final deviceHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
 
-    final deviceWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final deviceWidth = MediaQuery.of(context).size.width;
     final standardDeviceWidth = 410;
 
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width * 0.6;
+    double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -206,7 +178,7 @@ class _ListViewPageState extends State<ListViewPage> {
             iconSize: 25,
             icon: Icon(Icons.search, color: Colors.black),
             onPressed: () {
-              showSearch(context: context, delegate: Search(titleList));
+              showSearch(context: context, delegate: Search(Listview.titleList));
             },
           ),
         ],
@@ -224,30 +196,26 @@ class _ListViewPageState extends State<ListViewPage> {
                 color: Colors.white,
                 child: ListView.builder(
                   controller: _scrollController,
-                  itemCount: titleList.length,
+                  itemCount: Listview.titleList.length,
                   itemBuilder: (context, index) {
-                    final alreadySaved = saved.contains(titleList[index]);
+                    final alreadySaved = Listview.saved.contains(Listview.titleList[index]);
+                    // bool alreadySaved = false;
+                    // snapshot.data!["heart"].forEach((element) {
+                    //   if(element.compareTo([Listview.titleList[index]])==0) {
+                    //     alreadySaved = true;
+                    //   }
+                    // });
                     return InkWell(
                       onTap: () {
-                        debugPrint(titleList[index]);
-                        showPopup(
-                            context,
-                            titleList[index],
-                            imageList[index],
-                            description[index],
-                            detail[index],
-                            desc1[index],
-                            desc2[index],
-                            desc3[index]);
+                        debugPrint(Listview.titleList[index]);
+                        showPopup(context, Listview.titleList[index], imageList[index],
+                            Listview.description1[index], detail[index], desc1[index], desc2[index], desc3[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: Theme
-                                .of(context)
-                                .colorScheme
-                                .outline,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                           borderRadius:
                           const BorderRadius.all(Radius.circular(20)),
@@ -255,24 +223,20 @@ class _ListViewPageState extends State<ListViewPage> {
                         child: Row(
                           children: [
                             SizedBox(
-                                height: 50 *
-                                    (deviceHeight / standardDeviceHeight),
-                                width: 30 *
-                                    (deviceWidth / standardDeviceWidth)),
+                                height: 50 * (deviceHeight / standardDeviceHeight),
+                                width: 30 * (deviceWidth / standardDeviceWidth)),
                             Padding(
                               padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                      height: 10 * (deviceHeight /
-                                          standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)),
                                   Row(
                                     children: [
                                       SizedBox(
-                                        width: 120 * (deviceWidth /
-                                            standardDeviceWidth),
+                                        width: 120 * (deviceWidth / standardDeviceWidth),
                                         child: Text(
-                                          titleList[index],
+                                          Listview.titleList[index],
                                           style: const TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
@@ -281,11 +245,10 @@ class _ListViewPageState extends State<ListViewPage> {
                                       ),
 
                                       SizedBox(
-                                        width: 70 * (deviceWidth /
-                                            standardDeviceWidth),
+                                        width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            description[index],
+                                            Listview.description1[index],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -296,17 +259,15 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffFEF0E3),
-                                            borderRadius: BorderRadius
-                                                .circular(20),
+                                            borderRadius: BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 70 * (deviceWidth /
-                                            standardDeviceWidth),
+                                        width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            description[index],
+                                            Listview.description2[index],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -317,14 +278,12 @@ class _ListViewPageState extends State<ListViewPage> {
                                           height: 20.0,
                                           decoration: BoxDecoration(
                                             color: Color(0xffE7FAF7),
-                                            borderRadius: BorderRadius
-                                                .circular(20),
+                                            borderRadius: BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 35 * (deviceWidth /
-                                            standardDeviceWidth),
+                                        width: 35 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
                                         icon: Icon(
@@ -340,18 +299,24 @@ class _ListViewPageState extends State<ListViewPage> {
                                         onPressed: () {
                                           setState(() {
                                             if (alreadySaved) {
-                                              saved.remove(titleList[index]);
+                                              final heartCollectionReference = FirebaseFirestore.instance.collection(
+                                                  "users").doc(FirebaseAuth.instance.currentUser!.displayName);
+                                              heartCollectionReference.update(
+                                                  {'heart': FieldValue.arrayRemove([Listview.titleList[index]])});
+                                              Listview.saved.remove(Listview.titleList[index]);
                                             } else {
-                                              saved.add(titleList[index]);
+                                              final heartCollectionReference = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.displayName);
+                                              heartCollectionReference.update({'heart':FieldValue.arrayUnion([Listview.titleList[index]])});
+                                              Listview.saved.add(Listview.titleList[index]);
                                             }
                                           });
+                                          print(Listview.saved);
                                         },
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                      height: 10 * (deviceHeight /
-                                          standardDeviceHeight)
+                                      height: 10 * (deviceHeight / standardDeviceHeight)
                                   ),
                                 ], //children
                               ),
@@ -543,7 +508,6 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestionList = [];
-    List<String> saved = [];
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
 
@@ -576,12 +540,12 @@ class Search extends SearchDelegate {
       child: ListView.builder(
         itemCount: suggestionList.length,
         itemBuilder: (context, index) {
-          final alreadySaved = saved.contains(suggestionList[index]);
+          final alreadySaved = Listview.saved.contains(suggestionList[index]);
           return InkWell(
             onTap: () {
               debugPrint(suggestionList[index]);
               showPopup(context, suggestionList[index], imageList[index],
-                  description[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                  Listview.description2[index], detail[index], desc1[index], desc2[index], desc3[index]);
             },
             child: Card(
               color: Color(0xffF5F5F5),
@@ -620,7 +584,7 @@ class Search extends SearchDelegate {
                               width: 70 * (deviceWidth / standardDeviceWidth),
                               child: Container(
                                 child: Text(
-                                  description[index],
+                                  Listview.description1[index],
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15,
@@ -639,7 +603,7 @@ class Search extends SearchDelegate {
                               width: 70 * (deviceWidth / standardDeviceWidth),
                               child: Container(
                                 child: Text(
-                                  description[index],
+                                  Listview.description2[index],
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15,
@@ -670,18 +634,17 @@ class Search extends SearchDelegate {
                               ),
                               onPressed: () {
                                 if (alreadySaved) {
-                                  saved.remove(suggestionList[index]);
+                                  Listview.saved.remove(suggestionList[index]);
                                 }
                                 else {
-                                  saved.add(suggestionList[index]);
-                                };
+                                  Listview.saved.add(suggestionList[index]);
+                                }
                               },
                             ),
                           ],
                         ),
                         SizedBox(
-                            height: 10 * (deviceHeight / standardDeviceHeight)
-                        ),
+                            height: 10 * (deviceHeight / standardDeviceHeight)),
                       ], //children
                     ),
                   ),
