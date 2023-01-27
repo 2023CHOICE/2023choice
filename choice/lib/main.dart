@@ -1,4 +1,4 @@
-import 'package:choice/result/WUYB.dart';
+import 'package:choice/result/WUYB-전산.dart';
 import 'package:flutter/material.dart';
 import 'func/home.dart';
 import 'login/app.dart';

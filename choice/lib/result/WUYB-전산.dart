@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../func/home.dart';
 
 
-class WUYB extends StatelessWidget {
-  const WUYB({super.key});
+class Result extends StatelessWidget {
+  const Result({super.key});
 
   static const String _title = 'Flutter Code Sample';
 

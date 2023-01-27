@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
 import '2.dart';
 
 class Question1 extends StatelessWidget {
@@ -118,6 +119,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Profile.m += 20;
+                                    Profile.nlist[2] += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -146,6 +149,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Profile.m += 20;
+                                    Profile.nlist[0] += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -178,6 +183,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Profile.m += 20;
+                                    Profile.nlist[3] += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -206,6 +213,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Profile.m += 20;
+                                    Profile.nlist[1] += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -234,6 +243,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Profile.w += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

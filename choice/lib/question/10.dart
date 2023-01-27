@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
 import '11.dart';
 import '9.dart';
 
@@ -140,6 +141,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
+                                  Profile.study += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question11()),
@@ -174,6 +176,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
+                                  Profile.com += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question11()),

@@ -1,6 +1,9 @@
+import 'package:choice/result/WUYB-전산.dart';
 import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
+import '../result/MUHD-악기.dart';
 import '12.dart';
 import '2.dart';
 import '4.dart';
@@ -128,10 +131,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ),
                                     textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.b += 10;
+                                  String result = Profile.getResult();
+                                  print(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Question4()),
+                                        builder: (context) => Result()),
                                   );
                                 },
                               )),
@@ -152,10 +158,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ),
                                     textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.d += 30;
+                                  String result = Profile.getResult();
+                                  print(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Question4()),
+                                        builder: (context) => Result()),
                                   );
                                 },
                               )),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
+import '../func/profile.dart';
 import '2.dart';
 import '4.dart';
 
@@ -215,6 +216,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ),
                                     textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.h += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -239,6 +241,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ),
                                     textAlign: TextAlign.center),
                                 onPressed: () {
+                                  Profile.y += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
