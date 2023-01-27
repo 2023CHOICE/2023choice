@@ -38,9 +38,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   getData(String que_result) async {
+    Question13.listName.clear();
     var result = await FirebaseFirestore.instance.collection("result").doc(que_result).get();
     print(result['character']);
     Question13.character = result['character'];
+    print(result['color']);
     Question13.colorNum = result['color'];
     FirebaseFirestore.instance.collection("result").doc(que_result).collection("listName").snapshots().listen((snapshots) async {
       for(var doc in snapshots.docs){
