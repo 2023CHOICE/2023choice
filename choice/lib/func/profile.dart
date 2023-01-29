@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:choice/func/like.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +52,6 @@ class Profile extends StatelessWidget {
       }
       int maxindex = nlist.indexOf(max);
       print(maxindex);
-      if(maxindex==0) result += '-춤';
-      else if(maxindex==1) result += '-노래,랩';
-      else if(maxindex==1) result += '-악기';
-      else result += '-밴드';
     }
 
     if(result == 'MUYB') {
