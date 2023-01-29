@@ -46,9 +46,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     if(Listview.titleList.isEmpty && Listview.description1.isEmpty && Listview.description2.isEmpty) getData();
+
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
     return Scaffold(

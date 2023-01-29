@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:choice/func/like.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +52,6 @@ class Profile extends StatelessWidget {
       }
       int maxindex = nlist.indexOf(max);
       print(maxindex);
-      if(maxindex==0) result += '_dance';
-      else if(maxindex==1) result += '_sing';
-      else if(maxindex==1) result += '_inst';
-      else result += '_band';
     }
 
     if(result == 'MUYB') {

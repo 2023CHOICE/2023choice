@@ -1,12 +1,7 @@
-import 'package:choice/result/WUYB-전산.dart';
 import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
-import '../result/MUHD-악기.dart';
-import '12.dart';
-import '2.dart';
-import '4.dart';
 
 class Question13 extends StatelessWidget {
   const Question13({super.key});
@@ -31,9 +26,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +126,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   Profile.b += 10;
                                   String result = Profile.getResult();
                                   print(result);
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
