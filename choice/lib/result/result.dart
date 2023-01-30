@@ -128,7 +128,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   SizedBox(
                     height: 50 * (deviceHeight / standardDeviceHeight),
                   ),
-                  Text('"'+Question13.character+'과 닮은 당신은 아래와 같은\n동아리가 어울려요!!"',
+                  Text('"'+Question13.character+'을/를 닮은 당신은\n아래와 같은 동아리가 어울려요!!"',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
@@ -175,13 +175,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   minimumSize: const Size(380, 30),
                 ),
-                child: Text('테스트 시작하기',
+                child: Text('결과 저장하기',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
               ),
             ),
           ),

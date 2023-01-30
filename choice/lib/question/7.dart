@@ -59,12 +59,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               horizontal: 30,
                               vertical: 30
                           ),
-                          icon: Image.asset('assets/images/left.png'),
+                          icon: Icon(
+                              Icons.home_outlined, color: Colors.black),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Question6()),
+                              MaterialPageRoute(
+                                  builder: (context) => Home()),
                             );
                           },
                         ),
@@ -182,42 +184,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: current_index,
-        backgroundColor: Colors.black,
-        onTap: (index) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => _children[index]),
-          );
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: '리스트',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: '찜',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '프로필',
-            backgroundColor: Colors.black,
-          ),
-        ],
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
       ),
     );
   }
