@@ -1,3 +1,4 @@
+import 'package:choice/func/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,12 +46,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       }
     });
   }
-
+  Future<void> setData() async {
+    Profile.m = 0;
+    Profile.w = 0;
+    Profile.v = 0;
+    Profile.u = 0;
+    Profile.h = 0;
+    Profile.y = 0;
+    Profile.d = 0;
+    Profile.b = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     if(Listview.titleList.isEmpty && Listview.description1.isEmpty && Listview.description2.isEmpty) getData();
-
+    setData();
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
     return Scaffold(
