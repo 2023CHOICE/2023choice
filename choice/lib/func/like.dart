@@ -1,4 +1,5 @@
 import 'package:choice/func/like.dart';
+import 'package:choice/func/profile.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'list.dart';
@@ -23,7 +24,7 @@ class LikePage extends StatefulWidget {
 
 class _LikePageState extends State<LikePage> {
   int current_index = 2;
-  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 

@@ -11,6 +11,7 @@ class Question13 extends StatelessWidget {
 
   static const String _title = 'Flutter Code Sample';
   static String character = '';
+  static String listnames = '';
   static List<String> listName = [];
   static int colorNum = 0;
 
@@ -37,26 +38,41 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  getData(String que_result) async {
+  Future<void> getData(String que_result) async {
     print("M: " + Profile.m.toString());
     print("W: " + Profile.w.toString());
     print("H: " + Profile.h.toString());
     print("Y: " + Profile.y.toString());
     print("D: " + Profile.d.toString());
     print("B: " + Profile.b.toString());
+    print("dance: " + Profile.nlist[0].toString());
+    print("sing: " + Profile.nlist[1].toString());
+    print("inst: " + Profile.nlist[2].toString());
+    print("band: " + Profile.nlist[3].toString());
+    print("tool: " + Profile.tool.toString());
+    print("body: " + Profile.body.toString());
+    print("com: " + Profile.com.toString());
+    print("study: " + Profile.study.toString());
+    print("volunteer: " + Profile.volunteer.toString());
 
-    Question13.listName.clear();
-    var result = await FirebaseFirestore.instance.collection("result").doc(que_result).get();
+    var result = await FirebaseFirestore.instance.collection("result").doc(
+        que_result).get();
     print(result['character']);
     Question13.character = result['character'];
     print(result['color']);
     Question13.colorNum = result['color'];
-    FirebaseFirestore.instance.collection("result").doc(que_result).collection("listName").snapshots().listen((snapshots) async {
-      for(var doc in snapshots.docs){
-        Question13.listName.add(doc.id);
-      }
-      print(Question13.listName);
-    });
+
+    var snapshots = await FirebaseFirestore.instance.collection("result").doc(
+        que_result).collection("listName").get();
+    for (var doc in snapshots.docs) {
+      Question13.listName.add(doc.id);
+    }
+    print(Question13.listName);
+
+    for(var l in Question13.listName) {
+      Question13.listnames = Question13.listnames + "- "+ l + "\n";
+    }
+    print(Question13.listnames);
   }
 
   @override
@@ -125,7 +141,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * (deviceHeight / standardDeviceHeight),
-                      child: Text('13. 어떤 창작물을 만들었을 때 드는 생각은?',
+                      child: Text('13. 어떤 창작물을 만들었을 때\n드는 생각은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -154,11 +170,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       fontSize: 25,
                                     ),
                                     textAlign: TextAlign.center),
-                                onPressed: () {
+                                onPressed: () async{
                                   Profile.b += 10;
                                   String result = Profile.getResult();
                                   print(result);
-                                  getData(result);
+                                  await getData(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -182,11 +198,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       fontSize: 25,
                                     ),
                                     textAlign: TextAlign.center),
-                                onPressed: () {
+                                onPressed: () async {
                                   Profile.d += 10;
                                   String result = Profile.getResult();
                                   print(result);
-                                  getData(result);
+                                  await getData(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

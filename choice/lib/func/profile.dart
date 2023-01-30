@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:choice/func/like.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'list.dart';
@@ -51,7 +52,7 @@ class Profile extends StatelessWidget {
       print(maxindex);
       if(maxindex==0) result += '-춤';
       else if(maxindex==1) result += '-노래,랩';
-      else if(maxindex==1) result += '-악기';
+      else if(maxindex==2) result += '-악기';
       else result += '-밴드';
     }
 
@@ -61,8 +62,11 @@ class Profile extends StatelessWidget {
     }
 
     if(result == 'WYB') {
-      if(com>study) result += '-전산';
-      else result += '-전산 외';
+      if(volunteer != 0) result += '-봉사';
+      else {
+        if(com>study) result += '-전산';
+        else result += '-전산 외';
+      }
     }
 
     return result;
@@ -199,150 +203,105 @@ class _ProfilePageState extends State<ProfilePage> {
 
     double width = MediaQuery.of(context).size.width * 0.6;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffB9CAFE),
-        toolbarHeight: 100,
-        title: Text('CHOICE!',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 40,
-              color: Colors.black,
-            ),
-            textAlign: TextAlign.center),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(100),
-          ),
-        ),
-      ),
-      body: Scrollbar(
-        controller: _scrollController,
-        isAlwaysShown: true,
-        thickness: 10,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            SizedBox(
-                height: 20 * (deviceHeight / standardDeviceHeight)),
-            Expanded(
-              flex: 9,
-              child: Container(
-                color: Colors.white,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: Listview.saved.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        debugPrint(Listview.titleList[index]);
-                      },
-                      child: Card(
-                        color: Color(0xffF5F5F5),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
-                          borderRadius:
-                          const BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                                height: 50 * (deviceHeight / standardDeviceHeight),
-                                width: 30 * (deviceWidth / standardDeviceWidth)),
-                            Padding(
-                              padding: const EdgeInsets.all(2),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 120 * (deviceWidth / standardDeviceWidth),
-                                        child: Text(
-                                          Listview.saved[index],
-                                          style: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 70 * (deviceWidth / standardDeviceWidth),
-                                        child: Container(
-                                          child: Text(
-                                            Listview.description1[index],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Color(0xffF28220)),
-                                          ),
-                                          //margin: const EdgeInsets.all(10.0),
-                                          width: 100.0,
-                                          height: 20.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xffFEF0E3),
-                                            borderRadius: BorderRadius.circular(20),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 70 * (deviceWidth / standardDeviceWidth),
-                                        child: Container(
-                                          child: Text(
-                                            Listview.description2[index],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Color(0xff3FD69F)),
-                                          ),
-                                          //margin: const EdgeInsets.all(10.0),
-                                          width: 100.0,
-                                          height: 20.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xffE7FAF7),
-                                            borderRadius: BorderRadius.circular(20),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 35 * (deviceWidth / standardDeviceWidth),
-                                      ),
-                                      IconButton(
-                                          icon: selected
-                                              ? first_icon
-                                              : second_icon,
-                                          color: Colors.red,
-                                          onPressed: () {
-                                            try {
-                                              // your code that you want this IconButton do
-                                              setState(() {
-                                                selected  = !selected;
-                                              });
-                                            } catch(e) {
-                                              print(e);
-                                            }
-                                          }),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
-                                ], //children
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+      body:StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBar(
+                backgroundColor: Color(0xffB9CAFE),
+                toolbarHeight: 100,
+                title: Text('PROFILE!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(100),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+              body: Scrollbar(
+                controller: _scrollController,
+                isAlwaysShown: true,
+                thickness: 10,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                        height: 20 * (deviceHeight / standardDeviceHeight)),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
+                        color: Colors.white,
+                        child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('개인프로필',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.person,
+                                      size: 150,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('${snapshot.data?.displayName}',
+                                          style: TextStyle(
+                                            height: 1,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10 * ( deviceHeight / standardDeviceHeight),
+                                        ),
+                                        Text('${snapshot.data?.email}',
+                                          style: TextStyle(
+                                            height: 1,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30 * ( deviceHeight / standardDeviceHeight),
+                                ),
+                                Text('최근 테스트 결과',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            )
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: current_index,
@@ -382,3 +341,4 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+

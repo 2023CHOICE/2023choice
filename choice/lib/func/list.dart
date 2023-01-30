@@ -1,3 +1,4 @@
+import 'package:choice/func/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _ListViewPageState extends State<ListViewPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
   int current_index = 1;
 
-  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 

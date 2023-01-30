@@ -128,7 +128,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('오 나도 한번 이런 기회를 만들어보고 싶다',
+                                    Text('오 나도 한번 이런 기회를',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    Text('만들어보고 싶다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,

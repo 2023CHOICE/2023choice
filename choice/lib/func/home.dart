@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../question/1.dart';
+import '../question/13.dart';
 import 'like.dart';
 import 'list.dart';
 class Home extends StatelessWidget {
@@ -29,7 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Like(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -46,6 +47,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       }
     });
   }
+
   Future<void> setData() async {
     Profile.m = 0;
     Profile.w = 0;
@@ -53,6 +55,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Profile.y = 0;
     Profile.d = 0;
     Profile.b = 0;
+    Profile.nlist[0] = 0;
+    Profile.nlist[1] = 0;
+    Profile.nlist[2] = 0;
+    Profile.nlist[3] = 0;
+    Profile.body = 0;
+    Profile.tool = 0;
+    Profile.study = 0;
+    Profile.com = 0;
+    Profile.volunteer = 0;
+    Question13.listName.clear();
+    Question13.listnames = '';
   }
 
   @override

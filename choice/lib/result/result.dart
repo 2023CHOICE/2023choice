@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../../func/home.dart';
 import '../../func/list.dart';
 import '../../question/13.dart';
+import '../func/profile.dart';
 
 
 class Result extends StatelessWidget {
   const Result({super.key});
 
   static const String _title = 'Flutter Code Sample';
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,10 @@ class MyStatefulWidget extends StatefulWidget {
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
+
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +46,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         .width;
     final standardDeviceWidth = 410;
 
-    return Scaffold(
+    return Scaffold (
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Container(
-            color: Colors.white,
+          Expanded(
+            flex: 4,
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -93,12 +93,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             ),
                             Image.asset(
                               'assets/images/result/wuyb.png',
-                              height: 200 * (deviceWidth / standardDeviceWidth),
-                              width: 200 * (deviceWidth / standardDeviceWidth),
-                            ),
-                            SizedBox(
-                              height: 30 * (deviceHeight /
-                                  standardDeviceHeight),
+                              height: 100 * (deviceWidth / standardDeviceWidth),
+                              width: 100 * (deviceWidth / standardDeviceWidth),
                             ),
                             Text('당신은 한동의',
                                 style: TextStyle(
@@ -108,15 +104,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 textAlign: TextAlign.center
                             ),
-                            SizedBox(
-                              height: 10 * (deviceHeight /
-                                  standardDeviceHeight),
-                            ),
                             Text(Question13.character, // 과일명
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30,
-                                color: Colors.green,
+                                color: Color(Question13.colorNum - 30000),
                               ),
                             ),
                           ]
@@ -127,6 +119,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ),
           Expanded(
+            flex: 6,
             child: Container(
               color: Colors.white,
               child: Column(
@@ -135,7 +128,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   SizedBox(
                     height: 50 * (deviceHeight / standardDeviceHeight),
                   ),
-                  Text('"청사과 같은 당신은 아래와 같은\n동아리가 어울려요!!"',
+                  Text('"'+Question13.character+'과 닮은 당신은 아래와 같은\n동아리가 어울려요!!"',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
@@ -146,15 +139,49 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   SizedBox(
                     height: 40 * (deviceHeight / standardDeviceHeight),
                   ),
-                  Text('안녕 !\n 안녕 !',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.black54,
-                      ),
-                      textAlign: TextAlign.center
+                  Container(
+                    padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                    child : Text(Question13.listnames,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23,
+                          color: Colors.black54,
+                          height: 1.6,
+                        ),
+                        textAlign: TextAlign.left
+                    ),
                   ),
                 ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 50,
+                vertical: 20,
+              ),
+              color: Colors.white,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder( //to set border radius to button
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  side: const BorderSide(
+                    width: 3.0, color: Colors.black,
+                  ),
+                  minimumSize: const Size(380, 30),
+                ),
+                child: Text('테스트 시작하기',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+                ),
+                onPressed: () {
+
+                },
               ),
             ),
           ),
