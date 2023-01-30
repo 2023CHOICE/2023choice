@@ -1,12 +1,19 @@
+import 'package:choice/result/result.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
+import '12.dart';
 
 class Question13 extends StatelessWidget {
   const Question13({super.key});
 
   static const String _title = 'Flutter Code Sample';
+  static String character = '';
+  static List<String> listName = [];
+  static int colorNum = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +33,33 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  getData(String que_result) async {
+    print("M: " + Profile.m.toString());
+    print("W: " + Profile.w.toString());
+    print("V: " + Profile.v.toString());
+    print("U: " + Profile.u.toString());
+    print("H: " + Profile.h.toString());
+    print("Y: " + Profile.y.toString());
+    print("D: " + Profile.d.toString());
+    print("B: " + Profile.b.toString());
+
+    Question13.listName.clear();
+    var result = await FirebaseFirestore.instance.collection("result").doc(que_result).get();
+    print(result['character']);
+    Question13.character = result['character'];
+    print(result['color']);
+    Question13.colorNum = result['color'];
+    FirebaseFirestore.instance.collection("result").doc(que_result).collection("listName").snapshots().listen((snapshots) async {
+      for(var doc in snapshots.docs){
+        Question13.listName.add(doc.id);
+      }
+      print(Question13.listName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +160,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   Profile.b += 10;
                                   String result = Profile.getResult();
                                   print(result);
-
+                                  getData(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -154,6 +188,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   Profile.d += 30;
                                   String result = Profile.getResult();
                                   print(result);
+                                  getData(result);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
