@@ -30,7 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -165,7 +165,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  Profile.y += 10;
+                                  Profile.y += 30;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question13()),

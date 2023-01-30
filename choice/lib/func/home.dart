@@ -49,8 +49,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Future<void> setData() async {
     Profile.m = 0;
     Profile.w = 0;
-    Profile.v = 0;
-    Profile.u = 0;
     Profile.h = 0;
     Profile.y = 0;
     Profile.d = 0;

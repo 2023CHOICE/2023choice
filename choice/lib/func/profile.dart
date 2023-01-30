@@ -11,40 +11,36 @@ class Profile extends StatelessWidget {
 
   static int m = 0;
   static int w = 0;
-  static int v = 0;
-  static int u = 0;
   static int h = 0;
   static int y = 0;
   static int d = 0;
   static int b = 0;
 
-  static List<dynamic> nlist = [0,0,0,0]; // MUYD, MUHD 일 시 사용
+  static List<dynamic> nlist = [0,0,0,0]; // MYD, MHD 일 시 사용
 
-  static int body = 0; // MUYB - 도구X 일 시 사용
-  static int tool = 0; // MUYB - 도구O 일 시 사용
+  static int body = 0; // MYB, MHB - 도구X 일 시 사용
+  static int tool = 0; // MYB, MHB - 도구O 일 시 사용
 
-  static int com = 0; // WUYB - 전산 일 시 사용
-  static int study = 0; // WUYB - 전산 외 일 시 사용
+  static int com = 0; // WYB-전산 일 시 사용
+  static int study = 0; // WYB-전산 외 일 시 사용
+
+  static int volunteer = 0; //WYB-봉사 일 시 사용
 
   static String mw = '';
-  static String vu = '';
   static String hy = '';
   static String db = '';
-
 
   static String getResult() {
     if(m>w) mw = 'M';
     else mw = 'W';
-    if(v>u) vu = 'V';
-    else vu = 'U';
     if(h>y) hy = 'H';
     else hy = 'Y';
     if(d>b) db = 'D';
     else db = 'B';
 
-    String result = mw+vu+hy+db;
+    String result = mw+hy+db;
 
-    if(result == 'MUYD' || result == 'MUHD') {
+    if(result == 'MYD' || result == 'MHD') {
       int max = nlist[0];
       for (var element in nlist) {
         if (element > max) {
@@ -59,12 +55,12 @@ class Profile extends StatelessWidget {
       else result += '-밴드';
     }
 
-    if(result == 'MUYB') {
+    if(result == 'MYB' || result == 'MHB') {
       if(body>tool) result += '-도구X';
       else result += '-도구O';
     }
 
-    if(result == 'WUYB') {
+    if(result == 'WYB') {
       if(com>study) result += '-전산';
       else result += '-전산 외';
     }

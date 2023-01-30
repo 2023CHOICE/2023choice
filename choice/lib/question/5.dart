@@ -29,7 +29,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -100,7 +100,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('5. 바쁜 학기로 예상되는 다음 학기 \n 계획을 세운다면?',
+                      child: Text('5. 음악 관련 동아리에 흥미가 있는가?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -126,13 +126,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('음악적인 여가활동이 필요하다!',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center),
-                                    Text('여가 계획에 추가한다',
+                                    Text('그렇다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
@@ -161,13 +155,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('활동은 사치야!',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center),
-                                    Text('최대한 남는 시간은 휴식으로 채운다',
+                                    Text('아니다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,

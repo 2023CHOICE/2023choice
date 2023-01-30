@@ -31,7 +31,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -102,7 +102,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('8. 너무 완벽한 무대를 접한 당신\n 당신의 속마음은?',
+                      child: Text('8. 너무 완벽한 무대나 전시회를 접한 당신\n 당신의 속마음은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -128,7 +128,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('오 나도 한번 저런 무대 서보고 싶다 ',
+                                    Text('오 나도 한번 이런 기회를 만들어보고 싶다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,

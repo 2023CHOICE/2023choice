@@ -28,7 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -99,7 +99,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('2. 하루 벌어 하루 사는 당신! \n 당신보다 불우한 이웃을 보았을 때의\n당신의 선택은?',
+                      child: Text('2. 만약 10대 1로 싸우는 꿈을 꾸었다.\n이때 당신이 상대방과 맞서 싸우는 방식은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -125,13 +125,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('당장의 내 삶이 조금 더',
+                                    Text('자존심이 허락 못한다.',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
                                         textAlign: TextAlign.center),
-                                    Text('힘들어지더라도 돕고 본다',
+                                    Text('맨몸으로 싸운다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
@@ -140,7 +140,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  Profile.v += 10;
+                                  Profile.body += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question3()),
@@ -160,13 +160,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('너무 안타깝고 죄송하지만',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center),
-                                    Text('도울 수 없다',
+                                    Text('도구를 이용하여 싸운다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
@@ -175,7 +169,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  Profile.u += 10;
+                                  Profile.tool += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question3()),

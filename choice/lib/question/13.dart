@@ -40,8 +40,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   getData(String que_result) async {
     print("M: " + Profile.m.toString());
     print("W: " + Profile.w.toString());
-    print("V: " + Profile.v.toString());
-    print("U: " + Profile.u.toString());
     print("H: " + Profile.h.toString());
     print("Y: " + Profile.y.toString());
     print("D: " + Profile.d.toString());
@@ -127,7 +125,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * (deviceHeight / standardDeviceHeight),
-                      child: Text('13. 어떤 창작물을 만들었을 때 ?',
+                      child: Text('13. 어떤 창작물을 만들었을 때 드는 생각은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -185,7 +183,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ),
                                     textAlign: TextAlign.center),
                                 onPressed: () {
-                                  Profile.d += 30;
+                                  Profile.d += 10;
                                   String result = Profile.getResult();
                                   print(result);
                                   getData(result);

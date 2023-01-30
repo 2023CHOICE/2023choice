@@ -28,7 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -119,7 +119,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Profile.m += 20;
                                     Profile.nlist[2] += 10;
                                     Navigator.push(
                                         context,
@@ -149,7 +148,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Profile.m += 20;
                                     Profile.nlist[0] += 10;
                                     Navigator.push(
                                         context,
@@ -183,7 +181,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Profile.m += 20;
                                     Profile.nlist[3] += 10;
                                     Navigator.push(
                                         context,
@@ -213,7 +210,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Profile.m += 20;
                                     Profile.nlist[1] += 10;
                                     Navigator.push(
                                         context,
@@ -243,7 +239,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               InkWell(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Profile.w += 10;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -258,7 +253,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     backgroundColor: const Color(0xffB9CAFE),
                                   ),
                                   child: Text(
-                                    "없음",
+                                    "배우",
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,

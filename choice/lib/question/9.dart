@@ -30,7 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  final List<Widget> _children = [Home(), Listview(), Home(), Home()];
+  final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -101,7 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * ( deviceHeight / standardDeviceHeight),
-                      child: Text('9. 만약 10대 1로 싸우는 꿈을 꾸었다\n이때 당신이 상대방과 맞서 싸우는\n방식은?',
+                      child: Text('9. 바쁜 학기로 예상되는 다음 학기\n학기 계획을 세운다면?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -127,13 +127,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('자존심이 허락 못한다',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                        textAlign: TextAlign.center),
-                                    Text('맨몸으로 싸운다',
+                                    Text('음악적인 활동을 계획에 추가한다.',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
@@ -142,8 +136,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  Profile.m += 20;
-                                  Profile.body += 10;
+                                  Profile.m += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question10()),
@@ -163,7 +156,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('도구를 이용하여 싸운다',
+                                    Text('남는 시간에 운동 계획을 추가한다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
@@ -172,8 +165,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  Profile.m += 20;
-                                  Profile.tool += 10;
+                                  Profile.m += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => Question10()),
@@ -193,13 +185,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text('나는 평화주의자',
+                                    Text('활동은 사치야',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
                                         textAlign: TextAlign.center),
-                                    Text('싸우지 않는다',
+                                    Text('최대한 남는 시간은 휴식으로 채운다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
