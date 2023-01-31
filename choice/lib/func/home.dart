@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import '../question/1.dart';
 import '../question/13.dart';
+import '../result/result.dart';
 import 'like.dart';
 import 'list.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -32,20 +34,54 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  CollectionReference _collectionRef = FirebaseFirestore.instance.collection('lists');
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('lists');
 
   Future<void> getData() async {
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
-    FirebaseFirestore.instance.collection("lists").snapshots().listen((snapshots) async {
-      for(var doc in snapshots.docs){
+    FirebaseFirestore.instance
+        .collection("lists")
+        .snapshots()
+        .listen((snapshots) async {
+      for (var doc in snapshots.docs) {
         Listview.titleList.add(doc.id);
         Listview.description1.add(doc.get('result1'));
         Listview.description2.add(doc.get('result2'));
       }
     });
+  }
+
+  Future<void> getResultList() async{
+    var result = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("testResult")
+        .get();
+
+    for (var doc in result.docs) {
+        Result.resultName.add(doc.get('character'));
+      }
+    print("Result.resultName : ");
+    print(Result.resultName);
+
+  }
+
+  Future<void> getHeartList() async{
+    var heart = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList")
+        .get();
+
+    for (var doc in heart.docs) {
+      Listview.saved.add(doc.get('listName'));
+    }
+    print("Listview.saved : ");
+    print(Listview.saved);
+
   }
 
   Future<void> setData() async {
@@ -65,19 +101,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Profile.com = 0;
     Profile.volunteer = 0;
     Question13.listName.clear();
-    Question13.listnames = '';
   }
 
   @override
   Widget build(BuildContext context) {
-    if(Listview.titleList.isEmpty && Listview.description1.isEmpty && Listview.description2.isEmpty) getData();
+    if (Result.resultName.isEmpty) getResultList();
+    if (Listview.saved.isEmpty) getHeartList();
+    if (Listview.titleList.isEmpty &&
+        Listview.description1.isEmpty &&
+        Listview.description2.isEmpty) getData();
     setData();
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
     return Scaffold(
-      body:StreamBuilder(
+      body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot snapshot){
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,23 +124,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    padding:EdgeInsets.fromLTRB(300, 50, 10, 0),
+                    padding: EdgeInsets.fromLTRB(300, 50, 10, 0),
                     color: Colors.white,
                     height: 1.0,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder( //to set border radius to button
-                            borderRadius: BorderRadius.circular(10)
-                        ),
+                        shape: RoundedRectangleBorder(
+                            //to set border radius to button
+                            borderRadius: BorderRadius.circular(10)),
                         minimumSize: const Size(20, 20),
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black45,
                         side: const BorderSide(
-                          width: 2.0, color: Colors.black45,
+                          width: 2.0,
+                          color: Colors.black45,
                         ),
                       ),
-                      child: Text('logout',
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      child: Text(
+                        'logout',
+                        style: TextStyle(
+                            fontSize: 11, fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
                         FirebaseAuth.instance.signOut();
@@ -112,7 +154,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Expanded(
                   flex: 2,
                   child: Container(
-                    padding:EdgeInsets.fromLTRB(0, 70, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
                     color: Colors.white,
                     child: Center(
                       child: Column(
@@ -145,7 +187,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 180 * ( deviceHeight / standardDeviceHeight),
+                          height: 180 * (deviceHeight / standardDeviceHeight),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -155,10 +197,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           ),
                         ),
                         SizedBox(
-                          height: 20 * ( deviceHeight / standardDeviceHeight),
+                          height: 20 * (deviceHeight / standardDeviceHeight),
                         ),
                         SizedBox(
-                          height: 180 * ( deviceHeight / standardDeviceHeight),
+                          height: 180 * (deviceHeight / standardDeviceHeight),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -181,19 +223,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     color: Colors.white,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder( //to set border radius to button
-                            borderRadius: BorderRadius.circular(10)
-                        ),
+                        shape: RoundedRectangleBorder(
+                            //to set border radius to button
+                            borderRadius: BorderRadius.circular(10)),
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black,
                         side: const BorderSide(
-                          width: 3.0, color: Colors.black,
+                          width: 3.0,
+                          color: Colors.black,
                         ),
                         minimumSize: const Size(380, 30),
                       ),
-                      child: Text('테스트 시작하기',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-
+                      child: Text(
+                        '테스트 시작하기',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -266,6 +310,7 @@ class Character extends StatefulWidget {
 
 class _CharacterState extends State<Character> {
   int characterNumber = Random().nextInt(16) + 1;
+
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -1,5 +1,6 @@
-import 'package:choice/func/like.dart';
 import 'package:choice/func/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'list.dart';
@@ -45,16 +46,6 @@ class _LikePageState extends State<LikePage> {
   var imageList = ['assets/images/1.png'];
 
   var likeList = [];
-
-  get trailing => null;
-
-  var items = <String>[];
-
-  @override
-  void initState() {
-    items.addAll(Listview.titleList);
-    super.initState();
-  }
 
   void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
@@ -165,7 +156,9 @@ class _LikePageState extends State<LikePage> {
     final standardDeviceWidth = 410;
 
     double width = MediaQuery.of(context).size.width * 0.6;
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xffB9CAFE),
         toolbarHeight: 100,
@@ -241,7 +234,7 @@ class _LikePageState extends State<LikePage> {
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            Listview.description1[index],
+                                            Listview.description1[Listview.titleList.indexOf(Listview.saved[index])],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -260,7 +253,7 @@ class _LikePageState extends State<LikePage> {
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
                                           child: Text(
-                                            Listview.description2[index],
+                                            Listview.description2[Listview.titleList.indexOf(Listview.saved[index])],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
@@ -284,14 +277,13 @@ class _LikePageState extends State<LikePage> {
                                               : second_icon,
                                           color: Colors.red,
                                           onPressed: () {
-                                            try {
-                                              // your code that you want this IconButton do
-                                              setState(() {
-                                                selected  = !selected;
-                                              });
-                                            } catch(e) {
-                                              print(e);
-                                            }
+                                            setState(() {
+                                              final heartCollectionReference = FirebaseFirestore.instance.collection(
+                                                  "users").doc(FirebaseAuth.instance.currentUser!.displayName);
+                                              heartCollectionReference.update(
+                                                  {'heart': FieldValue.arrayRemove([Listview.saved[index]])});
+                                              Listview.saved.remove(Listview.saved[index]);
+                                            });
                                           }),
                                     ],
                                   ),

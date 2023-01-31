@@ -12,6 +12,8 @@ class Listview extends StatelessWidget {
   static List<String> description2 = [];
   static List<String> saved = [];
 
+
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -28,6 +30,22 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
+  Future<void> createHeartDoc(String name) async{
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList")
+        .doc(name)
+        .set({ 'listName' : name });
+    print("찜 문서 생성 성공!");
+  }
+
+  Future<void> deleteHeartDoc(String name) async{
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList").doc(name).delete();
+    print("찜 문서 삭제 성공!");
+  }
+
   FirebaseAuth auth = FirebaseAuth.instance;
   int current_index = 1;
 
@@ -52,8 +70,6 @@ class _ListViewPageState extends State<ListViewPage> {
   var imageList = ['assets/images/1.png'];
 
   var likeList = [];
-
-  get trailing => null;
 
   void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
@@ -297,21 +313,21 @@ class _ListViewPageState extends State<ListViewPage> {
                                               ? 'Remove from saved'
                                               : 'Save',
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          if (alreadySaved) {
+                                            await deleteHeartDoc(Listview.titleList[index]);
+                                          } else {
+                                            await createHeartDoc(Listview.titleList[index]);
+                                          }
                                           setState(() {
                                             if (alreadySaved) {
-                                              final heartCollectionReference = FirebaseFirestore.instance.collection(
-                                                  "users").doc(FirebaseAuth.instance.currentUser!.displayName);
-                                              heartCollectionReference.update(
-                                                  {'heart': FieldValue.arrayRemove([Listview.titleList[index]])});
                                               Listview.saved.remove(Listview.titleList[index]);
+                                              print(Listview.saved);
                                             } else {
-                                              final heartCollectionReference = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.displayName);
-                                              heartCollectionReference.update({'heart':FieldValue.arrayUnion([Listview.titleList[index]])});
                                               Listview.saved.add(Listview.titleList[index]);
+                                              print(Listview.saved);
                                             }
                                           });
-                                          print(Listview.saved);
                                         },
                                       ),
                                     ],
@@ -495,11 +511,7 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(selectedResult + "입니다"),
-      ),
-    );
+    return buildSuggestions(context);
   }
 
   final List<String> listExample;
@@ -634,12 +646,19 @@ class Search extends SearchDelegate {
                                     : 'Save',
                               ),
                               onPressed: () {
-                                if (alreadySaved) {
-                                  Listview.saved.remove(suggestionList[index]);
-                                }
-                                else {
-                                  Listview.saved.add(suggestionList[index]);
-                                }
+                                // setState(() {
+                                //   if (alreadySaved) {
+                                //     final heartCollectionReference = FirebaseFirestore.instance.collection(
+                                //         "users").doc(FirebaseAuth.instance.currentUser!.displayName);
+                                //     heartCollectionReference.update(
+                                //         {'heart': FieldValue.arrayRemove([Listview.titleList[index]])});
+                                //     Listview.saved.remove(Listview.titleList[index]);
+                                //   } else {
+                                //     final heartCollectionReference = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.displayName);
+                                //     heartCollectionReference.update({'heart':FieldValue.arrayUnion([Listview.titleList[index]])});
+                                //     Listview.saved.add(Listview.titleList[index]);
+                                //   }
+                                // });
                               },
                             ),
                           ],

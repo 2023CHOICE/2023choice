@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../func/home.dart';
@@ -6,11 +7,11 @@ import '../../func/list.dart';
 import '../../question/13.dart';
 import '../func/profile.dart';
 
-
 class Result extends StatelessWidget {
   const Result({super.key});
 
   static const String _title = 'Flutter Code Sample';
+  static List<String> resultName = [];
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +29,33 @@ class MyStatefulWidget extends StatefulWidget {
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
-
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  final ScrollController _scrollController = ScrollController();
+
+  Future<void> createResultDoc(String name) async{
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("testResult")
+        .doc(name)
+        .set({
+      "character": name,
+      "dateTime": Timestamp.now(),
+    });
+    print("결과 문서 생성 성공!");
+  }
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
-    final deviceWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final deviceWidth = MediaQuery.of(context).size.width;
     final standardDeviceWidth = 410;
 
-    return Scaffold (
+    return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -64,94 +73,224 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(30),
-                    bottomLeft:
-                    Radius.circular(50)
-                ),
+                    bottomLeft: Radius.circular(50)),
               ),
               child: Center(
                 child: Container(
                   padding: new EdgeInsets.all(30.0),
                   child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: IconButton(
-                                padding: EdgeInsets.fromLTRB(350, 20, 10, 20),
-                                icon: Icon(
-                                    Icons.home_outlined, color: Colors.black),
-                                iconSize: 30,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Home()),
-                                  );
-                                },
-                              ),
+                      child: Column(children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: IconButton(
+                            padding: EdgeInsets.fromLTRB(350, 20, 10, 20),
+                            icon:
+                                Icon(Icons.home_outlined, color: Colors.black),
+                            iconSize: 30,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                              );
+                            },
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/images/result/wuyb.png',
+                          height: 150 * (deviceWidth / standardDeviceWidth),
+                          width: 150 * (deviceWidth / standardDeviceWidth),
+                        ),
+                        Text('당신은 한동의',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                              color: Colors.black,
                             ),
-                            Image.asset(
-                              'assets/images/result/wuyb.png',
-                              height: 100 * (deviceWidth / standardDeviceWidth),
-                              width: 100 * (deviceWidth / standardDeviceWidth),
-                            ),
-                            Text('당신은 한동의',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                  color: Colors.black,
-                                ),
-                                textAlign: TextAlign.center
-                            ),
-                            Text(Question13.character, // 과일명
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                                color: Color(Question13.colorNum - 30000),
-                              ),
-                            ),
-                          ]
-                      )
-                  ),
+                            textAlign: TextAlign.center),
+                        Text(
+                          "\"" + Question13.character + "\"", // 과일명
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Color(Question13.colorNum - 30000),
+                          ),
+                        ),
+                      ])),
                 ),
               ),
             ),
           ),
           Expanded(
-            flex: 6,
+            flex: 1,
             child: Container(
               color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                    height: 50 * (deviceHeight / standardDeviceHeight),
+              child: Text(
+                  '\n"' +
+                      Question13.character +
+                      '"을(를) 닮은 당신은\n아래와 같은 동아리가 어울려요!!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.black,
                   ),
-                  Text('"'+Question13.character+'을/를 닮은 당신은\n아래와 같은 동아리가 어울려요!!"',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center
-                  ),
-                  SizedBox(
-                    height: 40 * (deviceHeight / standardDeviceHeight),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                    child : Text(Question13.listnames,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23,
-                          color: Colors.black54,
-                          height: 1.6,
+                  textAlign: TextAlign.center),
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Container(
+              color: Colors.white,
+              child: Scrollbar(
+                controller: _scrollController,
+                thickness: 10,
+                child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: Question13.listName.length,
+                    itemBuilder: (context, index) {
+                      final alreadySaved =
+                          Listview.saved.contains(Question13.listName[index]);
+                      return Card(
+                        color: Color(0xffF5F5F5),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
                         ),
-                        textAlign: TextAlign.left
-                    ),
-                  ),
-                ],
+                        child: Row(children: [
+                          SizedBox(
+                              height:
+                                  50 * (deviceHeight / standardDeviceHeight),
+                              width: 30 * (deviceWidth / standardDeviceWidth)),
+                          Padding(
+                            padding: const EdgeInsets.all(2),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: 10 *
+                                        (deviceHeight / standardDeviceHeight)),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 120 *
+                                          (deviceWidth / standardDeviceWidth),
+                                      child: Text(
+                                        Question13.listName[index],
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 70 *
+                                          (deviceWidth / standardDeviceWidth),
+                                      child: Container(
+                                        child: Text(
+                                          Listview.description1[
+                                              Listview.titleList.indexOf(
+                                                  Question13.listName[index])],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Color(0xffF28220)),
+                                        ),
+                                        //margin: const EdgeInsets.all(10.0),
+                                        width: 100.0,
+                                        height: 20.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFEF0E3),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 70 *
+                                          (deviceWidth / standardDeviceWidth),
+                                      child: Container(
+                                        child: Text(
+                                          Listview.description2[
+                                              Listview.titleList.indexOf(
+                                                  Question13.listName[index])],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Color(0xff3FD69F)),
+                                        ),
+                                        //margin: const EdgeInsets.all(10.0),
+                                        width: 100.0,
+                                        height: 20.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffE7FAF7),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 35 *
+                                          (deviceWidth / standardDeviceWidth),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        alreadySaved
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: alreadySaved ? Colors.red : null,
+                                        semanticLabel: alreadySaved
+                                            ? 'Remove from saved'
+                                            : 'Save',
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          if (alreadySaved) {
+                                            final heartCollectionReference =
+                                                FirebaseFirestore.instance
+                                                    .collection("users")
+                                                    .doc(FirebaseAuth
+                                                        .instance
+                                                        .currentUser!
+                                                        .displayName);
+                                            heartCollectionReference.update({
+                                              'heart': FieldValue.arrayRemove(
+                                                  [Listview.titleList[index]])
+                                            });
+                                            Listview.saved.remove(
+                                                Question13.listName[index]);
+                                          } else {
+                                            final heartCollectionReference =
+                                                FirebaseFirestore.instance
+                                                    .collection("users")
+                                                    .doc(FirebaseAuth
+                                                        .instance
+                                                        .currentUser!
+                                                        .displayName);
+                                            heartCollectionReference.update({
+                                              'heart': FieldValue.arrayUnion(
+                                                  [Question13.listName[index]])
+                                            });
+                                            Listview.saved.add(
+                                                Question13.listName[index]);
+                                          }
+                                        });
+                                        print(Listview.saved);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                    height: 10 *
+                                        (deviceHeight / standardDeviceHeight)),
+                              ], //children
+                            ),
+                          ),
+                        ]),
+                      );
+                    }),
               ),
             ),
           ),
@@ -165,20 +304,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               color: Colors.white,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder( //to set border radius to button
-                      borderRadius: BorderRadius.circular(10)
-                  ),
+                  shape: RoundedRectangleBorder(
+                      //to set border radius to button
+                      borderRadius: BorderRadius.circular(10)),
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
                   side: const BorderSide(
-                    width: 3.0, color: Colors.black,
+                    width: 3.0,
+                    color: Colors.black,
                   ),
                   minimumSize: const Size(380, 30),
                 ),
-                child: Text('결과 저장하기',
+                child: Text(
+                  '결과 저장하기',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await createResultDoc(Question13.character);
+                  Result.resultName.add(Question13.character);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile()),
+                  );
+                },
               ),
             ),
           ),

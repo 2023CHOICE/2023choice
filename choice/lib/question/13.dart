@@ -11,7 +11,6 @@ class Question13 extends StatelessWidget {
 
   static const String _title = 'Flutter Code Sample';
   static String character = '';
-  static String listnames = '';
   static List<String> listName = [];
   static int colorNum = 0;
 
@@ -68,11 +67,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       Question13.listName.add(doc.id);
     }
     print(Question13.listName);
-
-    for(var l in Question13.listName) {
-      Question13.listnames = Question13.listnames + "- "+ l + "\n";
-    }
-    print(Question13.listnames);
   }
 
   @override
