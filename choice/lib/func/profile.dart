@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
   int current_index = 3;
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   void showPopup(context, title, detail, String desc) {
     showDialog(
@@ -114,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (context) {
         return Dialog(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           child: Container(
             width: MediaQuery.of(context).size.width * 1.0,
             height: 220,
@@ -211,11 +211,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              body: Scrollbar(
-                controller: _scrollController,
-                isAlwaysShown: true,
-                thickness: 10,
-                child: Column(
+              body: Column(
                   children: <Widget>[
                     SizedBox(
                         height: 20 * (deviceHeight / standardDeviceHeight)),
@@ -232,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               SizedBox(
                                 width:
-                                    10 * (deviceHeight / standardDeviceHeight),
+                                10 * (deviceHeight / standardDeviceHeight),
                               ),
                               Text(
                                 '개인프로필',
@@ -255,58 +251,58 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         child: Container(
                             child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  Icons.face_retouching_natural,
-                                  size: 130,
-                                ),
-                                SizedBox(
-                                  width: 10 *
-                                      (deviceHeight / standardDeviceHeight),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: [
-                                    Text(
-                                      '${snapshot.data?.displayName}',
-                                      style: TextStyle(
-                                        height: 1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                      ),
+                                    Icon(
+                                      Icons.face_retouching_natural,
+                                      size: 130,
                                     ),
                                     SizedBox(
-                                      height: 10 *
+                                      width: 10 *
                                           (deviceHeight / standardDeviceHeight),
                                     ),
-                                    Text(
-                                      '${snapshot.data?.email}',
-                                      style: TextStyle(
-                                        height: 1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${snapshot.data?.displayName}',
+                                          style: TextStyle(
+                                            height: 1,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10 *
+                                              (deviceHeight / standardDeviceHeight),
+                                        ),
+                                        Text(
+                                          '${snapshot.data?.email}',
+                                          style: TextStyle(
+                                            height: 1,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height:
+                                ),
+                                SizedBox(
+                                  height:
                                   10 * (deviceHeight / standardDeviceHeight),
-                            ),
-                            Container(
-                              height: 1.0,
-                              width: 500.0,
-                              color: Colors.black,
-                            ),
-                          ],
-                        )),
+                                ),
+                                Container(
+                                  height: 1.0,
+                                  width: 500.0,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            )),
                       ),
                     ),
                     Expanded(
@@ -322,7 +318,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               SizedBox(
                                 width:
-                                    10 * (deviceHeight / standardDeviceHeight),
+                                10 * (deviceHeight / standardDeviceHeight),
                               ),
                               Text(
                                 '최근 테스트 결과',
@@ -343,11 +339,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         color: Colors.white,
-                        child: Scrollbar(
-                          controller: _scrollController,
-                          thickness: 10,
-                          child: ListView.builder(
-                              controller: _scrollController,
+                        child: ListView.builder(
                               itemCount: Result.resultName.length,
                               itemBuilder: (context, index) {
                                 return Card(
@@ -355,7 +347,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
                                       color:
-                                          Theme.of(context).colorScheme.outline,
+                                      Theme.of(context).colorScheme.outline,
                                     ),
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(20)),
@@ -379,6 +371,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                           Row(
                                             children: [
                                               SizedBox(
+                                                width: 20 *
+                                                    (deviceWidth /
+                                                        standardDeviceWidth),
+                                              ),
+                                              SizedBox(
                                                 width: 120 *
                                                     (deviceWidth /
                                                         standardDeviceWidth),
@@ -392,73 +389,46 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 70 *
+                                                width: 50 *
+                                                    (deviceWidth /
+                                                        standardDeviceWidth),
+                                              ),
+                                              SizedBox(
+                                                width: 130 *
                                                     (deviceWidth /
                                                         standardDeviceWidth),
                                                 child: Container(
                                                   child: Text(
-                                                    Listview
-                                                        .description1[index],
+                                                    Result.resultTime[index],
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         color:
-                                                            Color(0xffF28220)),
+                                                        Color(0xffF28220)),
                                                   ),
-                                                  //margin: const EdgeInsets.all(10.0),
                                                   width: 100.0,
                                                   height: 20.0,
                                                   decoration: BoxDecoration(
                                                     color: Color(0xffFEF0E3),
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
+                                                    BorderRadius.circular(
+                                                        20),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 70 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
-                                                child: Container(
-                                                  child: Text(
-                                                    Listview
-                                                        .description2[index],
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        color:
-                                                            Color(0xff3FD69F)),
-                                                  ),
-                                                  //margin: const EdgeInsets.all(10.0),
-                                                  width: 100.0,
-                                                  height: 20.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xffE7FAF7),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 35 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
                                               ),
                                             ],
                                           ),
                                           SizedBox(
                                               height: 10 *
                                                   (deviceHeight /
-                                                      standardDeviceHeight)),
+                                                      standardDeviceHeight)
+                                          ),
                                         ], //children
                                       ),
                                     ),
                                   ]),
                                 );
                               }),
-                        ),
                       ),
                     ),
                     Expanded(
@@ -468,49 +438,48 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         child: Center(
                             child: Column(
-                          children: [
-                            Container(
-                              height: 1.0,
-                              width: 500.0,
-                              color: Colors.black,
-                            ),
-                            SizedBox(
-                                height:
-                                    10 * (deviceHeight / standardDeviceHeight)),
-                            Row(
                               children: [
-                                Icon(
-                                  Icons.add_circle_outline,
+                                Container(
+                                  height: 1.0,
+                                  width: 500.0,
+                                  color: Colors.black,
                                 ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    primary: Colors.red, // foreground
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  child: Text('학회에 대해 궁금하시다면??',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20,
-                                        color: Colors.black54,
+                                SizedBox(
+                                    height:
+                                    10 * (deviceHeight / standardDeviceHeight)),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.add_circle_outline,
+                                    ),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.red, // foreground
+                                        backgroundColor: Colors.white,
                                       ),
-                                      textAlign: TextAlign.center),
-                                  onPressed: () {
-                                    showPopup(
-                                        context,
-                                        "한동대학교 학회",
-                                        "각 전공별 학회 리스트",
-                                        "- 경영경제학부\n컬러즈\n정치경제학회\n- 공간시스템공학부\n한.땅\n공기");
-                                  },
+                                      child: Text('학회에 대해 궁금하시다면??',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 20,
+                                            color: Colors.black54,
+                                          ),
+                                          textAlign: TextAlign.center),
+                                      onPressed: () {
+                                        showPopup(
+                                            context,
+                                            "한동대학교 학회",
+                                            "각 전공별 학회 리스트",
+                                            "- 경영경제학부\n컬러즈\n정치경제학회\n- 공간시스템공학부\n한.땅\n공기");
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
-                            ),
-                          ],
-                        )),
+                            )),
                       ),
                     ),
                   ],
                 ),
-              ),
             );
           }),
       bottomNavigationBar: BottomNavigationBar(

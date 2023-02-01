@@ -26,26 +26,20 @@ class LikePage extends StatefulWidget {
 class _LikePageState extends State<LikePage> {
   int current_index = 2;
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  var detail = [
-    '전산분과 프로젝트 동아리'
-  ];
+  var detail = ['전산분과 프로젝트 동아리'];
 
-  var desc1 = [
-    '- 학관 2층에 위치하고 있습니다.'
-  ];
-  var desc2 = [
-    '- 매주 월요일 7~8시에 정모가 있습니다.'
-  ];
-  var desc3 = [
-    '- 필수 학기는 2학기입니다.'
-  ];
+  var desc1 = ['- 학관 2층에 위치하고 있습니다.'];
+  var desc2 = ['- 매주 월요일 7~8시에 정모가 있습니다.'];
+  var desc3 = ['- 필수 학기는 2학기입니다.'];
 
   var imageList = ['assets/images/1.png'];
 
-  var likeList = [];
+  Future<void> deleteHeartDoc(String name) async{
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList").doc(name).delete();
+  }
 
   void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
@@ -53,7 +47,8 @@ class _LikePageState extends State<LikePage> {
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
+              borderRadius: BorderRadius.circular(30)
+          ),
           child: Container(
             width: MediaQuery
                 .of(context)
@@ -77,7 +72,8 @@ class _LikePageState extends State<LikePage> {
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Colors.black
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 Padding(
@@ -101,24 +97,24 @@ class _LikePageState extends State<LikePage> {
                             desc1,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
                             desc2,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
                             desc3,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -168,7 +164,8 @@ class _LikePageState extends State<LikePage> {
               fontSize: 40,
               color: Colors.black,
             ),
-            textAlign: TextAlign.center),
+            textAlign: TextAlign.center
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(100),
@@ -183,7 +180,8 @@ class _LikePageState extends State<LikePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-                height: 20 * (deviceHeight / standardDeviceHeight)),
+                height: 20 * (deviceHeight / standardDeviceHeight)
+            ),
             Expanded(
               flex: 9,
               child: Container(
@@ -211,13 +209,15 @@ class _LikePageState extends State<LikePage> {
                           children: [
                             SizedBox(
                                 height: 50 * (deviceHeight / standardDeviceHeight),
-                                width: 30 * (deviceWidth / standardDeviceWidth)),
+                                width: 30 * (deviceWidth / standardDeviceWidth)
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)
+                                  ),
                                   Row(
                                     children: [
                                       SizedBox(
@@ -238,9 +238,9 @@ class _LikePageState extends State<LikePage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: Color(0xffF28220)),
+                                                color: Color(0xffF28220)
+                                            ),
                                           ),
-                                          //margin: const EdgeInsets.all(10.0),
                                           width: 100.0,
                                           height: 20.0,
                                           decoration: BoxDecoration(
@@ -259,7 +259,6 @@ class _LikePageState extends State<LikePage> {
                                                 fontSize: 15,
                                                 color: Color(0xff3FD69F)),
                                           ),
-                                          //margin: const EdgeInsets.all(10.0),
                                           width: 100.0,
                                           height: 20.0,
                                           decoration: BoxDecoration(
@@ -276,19 +275,17 @@ class _LikePageState extends State<LikePage> {
                                               ? first_icon
                                               : second_icon,
                                           color: Colors.red,
-                                          onPressed: () {
+                                          onPressed: () async {
+                                            await deleteHeartDoc(Listview.saved[index]);
                                             setState(() {
-                                              final heartCollectionReference = FirebaseFirestore.instance.collection(
-                                                  "users").doc(FirebaseAuth.instance.currentUser!.displayName);
-                                              heartCollectionReference.update(
-                                                  {'heart': FieldValue.arrayRemove([Listview.saved[index]])});
                                               Listview.saved.remove(Listview.saved[index]);
                                             });
                                           }),
                                     ],
                                   ),
                                   SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)
+                                  ),
                                 ], //children
                               ),
                             ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../func/home.dart';
 import '../../func/list.dart';
@@ -12,6 +13,7 @@ class Result extends StatelessWidget {
 
   static const String _title = 'Flutter Code Sample';
   static List<String> resultName = [];
+  static List<String> resultTime = [];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   final ScrollController _scrollController = ScrollController();
 
-  Future<void> createResultDoc(String name) async{
+  Future<void> createResultDoc(String name) async {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.displayName)
@@ -43,9 +45,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         .doc(name)
         .set({
       "character": name,
-      "dateTime": Timestamp.now(),
+      "dateTime": DateFormat.yMd().add_jm().format(DateTime.now()),
     });
     print("결과 문서 생성 성공!");
+  }
+
+  Future<void> createHeartDoc(String name) async{
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList")
+        .doc(name)
+        .set({ 'listName' : name });
+  }
+
+  Future<void> deleteHeartDoc(String name) async{
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.displayName)
+        .collection("heartList").doc(name).delete();
   }
 
   @override
@@ -96,10 +112,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             },
                           ),
                         ),
-                        Image.asset(
-                          'assets/images/result/wuyb.png',
+                        Image.network(
+                          Question13.picUrl,
                           height: 150 * (deviceWidth / standardDeviceWidth),
                           width: 150 * (deviceWidth / standardDeviceWidth),
+                        ),
+                        SizedBox(
+                          height: 5 * (deviceWidth / standardDeviceWidth),
                         ),
                         Text('당신은 한동의',
                             style: TextStyle(
@@ -245,38 +264,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                             ? 'Remove from saved'
                                             : 'Save',
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        if (alreadySaved) {
+                                          await deleteHeartDoc(
+                                              Question13.listName[index]);
+                                        } else {
+                                          await createHeartDoc(
+                                              Question13.listName[index]);
+                                        }
                                         setState(() {
                                           if (alreadySaved) {
-                                            final heartCollectionReference =
-                                                FirebaseFirestore.instance
-                                                    .collection("users")
-                                                    .doc(FirebaseAuth
-                                                        .instance
-                                                        .currentUser!
-                                                        .displayName);
-                                            heartCollectionReference.update({
-                                              'heart': FieldValue.arrayRemove(
-                                                  [Listview.titleList[index]])
-                                            });
                                             Listview.saved.remove(
                                                 Question13.listName[index]);
                                           } else {
-                                            final heartCollectionReference =
-                                                FirebaseFirestore.instance
-                                                    .collection("users")
-                                                    .doc(FirebaseAuth
-                                                        .instance
-                                                        .currentUser!
-                                                        .displayName);
-                                            heartCollectionReference.update({
-                                              'heart': FieldValue.arrayUnion(
-                                                  [Question13.listName[index]])
-                                            });
-                                            Listview.saved.add(
-                                                Question13.listName[index]);
+                                            Listview.saved
+                                                .add(Question13.listName[index]);
                                           }
                                         });
+
                                         print(Listview.saved);
                                       },
                                     ),
@@ -322,6 +327,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPressed: () async {
                   await createResultDoc(Question13.character);
                   Result.resultName.add(Question13.character);
+                  Result.resultTime.add(DateFormat.yMd().add_jm().format(DateTime.now()));
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Profile()),

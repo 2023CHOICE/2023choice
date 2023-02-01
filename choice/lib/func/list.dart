@@ -12,8 +12,6 @@ class Listview extends StatelessWidget {
   static List<String> description2 = [];
   static List<String> saved = [];
 
-
-
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -24,7 +22,6 @@ class Listview extends StatelessWidget {
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);
-
   @override
   State<ListViewPage> createState() => _ListViewPageState();
 }
@@ -37,21 +34,18 @@ class _ListViewPageState extends State<ListViewPage> {
         .collection("heartList")
         .doc(name)
         .set({ 'listName' : name });
-    print("찜 문서 생성 성공!");
   }
 
   Future<void> deleteHeartDoc(String name) async{
     await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.displayName)
         .collection("heartList").doc(name).delete();
-    print("찜 문서 삭제 성공!");
   }
 
   FirebaseAuth auth = FirebaseAuth.instance;
   int current_index = 1;
 
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   var detail = [
     '전산분과 프로젝트 동아리'
@@ -69,15 +63,14 @@ class _ListViewPageState extends State<ListViewPage> {
 
   var imageList = ['assets/images/1.png'];
 
-  var likeList = [];
-
   void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
+              borderRadius: BorderRadius.circular(30)
+          ),
           child: Container(
             width: MediaQuery
                 .of(context)
@@ -101,7 +94,8 @@ class _ListViewPageState extends State<ListViewPage> {
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Colors.black
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 Padding(
@@ -126,7 +120,8 @@ class _ListViewPageState extends State<ListViewPage> {
                             style: const TextStyle(
                                 fontSize: 15,
                                 //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
@@ -134,15 +129,16 @@ class _ListViewPageState extends State<ListViewPage> {
                             style: const TextStyle(
                                 fontSize: 15,
                                 //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
                             desc3,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -216,12 +212,6 @@ class _ListViewPageState extends State<ListViewPage> {
                   itemCount: Listview.titleList.length,
                   itemBuilder: (context, index) {
                     final alreadySaved = Listview.saved.contains(Listview.titleList[index]);
-                    // bool alreadySaved = false;
-                    // snapshot.data!["heart"].forEach((element) {
-                    //   if(element.compareTo([Listview.titleList[index]])==0) {
-                    //     alreadySaved = true;
-                    //   }
-                    // });
                     return InkWell(
                       onTap: () {
                         debugPrint(Listview.titleList[index]);
@@ -241,13 +231,15 @@ class _ListViewPageState extends State<ListViewPage> {
                           children: [
                             SizedBox(
                                 height: 50 * (deviceHeight / standardDeviceHeight),
-                                width: 30 * (deviceWidth / standardDeviceWidth)),
+                                width: 30 * (deviceWidth / standardDeviceWidth)
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(2),
                               child: Column(
                                 children: [
                                   SizedBox(
-                                      height: 10 * (deviceHeight / standardDeviceHeight)),
+                                      height: 10 * (deviceHeight / standardDeviceHeight)
+                                  ),
                                   Row(
                                     children: [
                                       SizedBox(
@@ -260,7 +252,6 @@ class _ListViewPageState extends State<ListViewPage> {
                                               color: Colors.black),
                                         ),
                                       ),
-
                                       SizedBox(
                                         width: 70 * (deviceWidth / standardDeviceWidth),
                                         child: Container(
@@ -269,7 +260,8 @@ class _ListViewPageState extends State<ListViewPage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: Color(0xffF28220)),
+                                                color: Color(0xffF28220)
+                                            ),
                                           ),
                                           //margin: const EdgeInsets.all(10.0),
                                           width: 100.0,
@@ -288,7 +280,8 @@ class _ListViewPageState extends State<ListViewPage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: Color(0xff3FD69F)),
+                                                color: Color(0xff3FD69F)
+                                            ),
                                           ),
                                           //margin: const EdgeInsets.all(10.0),
                                           width: 100.0,
@@ -322,10 +315,8 @@ class _ListViewPageState extends State<ListViewPage> {
                                           setState(() {
                                             if (alreadySaved) {
                                               Listview.saved.remove(Listview.titleList[index]);
-                                              print(Listview.saved);
                                             } else {
                                               Listview.saved.add(Listview.titleList[index]);
-                                              print(Listview.saved);
                                             }
                                           });
                                         },
@@ -397,7 +388,8 @@ class Search extends SearchDelegate {
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
+              borderRadius: BorderRadius.circular(30)
+          ),
           child: Container(
             width: MediaQuery
                 .of(context)
@@ -421,7 +413,8 @@ class Search extends SearchDelegate {
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Colors.black
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 Padding(
@@ -445,24 +438,24 @@ class Search extends SearchDelegate {
                             desc1,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
                             desc2,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                           Text(
                             desc3,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: Colors.black
+                            ),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -502,7 +495,12 @@ class Search extends SearchDelegate {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Listview()
+          ),
+        );
       },
     );
   }
@@ -527,6 +525,20 @@ class Search extends SearchDelegate {
     final deviceWidth = MediaQuery.of(context).size.width;
     final standardDeviceWidth = 410;
 
+    Future<void> createHeartDoc(String name) async{
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.displayName)
+          .collection("heartList")
+          .doc(name)
+          .set({ 'listName' : name });
+    }
+
+    Future<void> deleteHeartDoc(String name) async{
+      await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.displayName)
+          .collection("heartList").doc(name).delete();
+    }
+
     var detail = [
       '전산분과 프로젝트 동아리'
     ];
@@ -548,132 +560,137 @@ class Search extends SearchDelegate {
         : suggestionList.addAll(listExample.where(
           (element) => element.contains(query),
     ));
-    return Container(
-      color: Colors.white,
-      child: ListView.builder(
-        itemCount: suggestionList.length,
-        itemBuilder: (context, index) {
-          final alreadySaved = Listview.saved.contains(suggestionList[index]);
-          return InkWell(
-            onTap: () {
-              debugPrint(suggestionList[index]);
-              showPopup(context, suggestionList[index], imageList[index],
-                  Listview.description2[index], detail[index], desc1[index], desc2[index], desc3[index]);
-            },
-            child: Card(
-              color: Color(0xffF5F5F5),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-                borderRadius:
-                const BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                      height: 50 * (deviceHeight / standardDeviceHeight),
-                      width: 30 * (deviceWidth / standardDeviceWidth)),
-                  Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: Column(
+    return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return Container(
+            color: Colors.white,
+            child: ListView.builder(
+              itemCount: suggestionList.length,
+              itemBuilder: (context, index) {
+                final alreadySaved = Listview.saved.contains(suggestionList[index]);
+                return InkWell(
+                  onTap: () {
+                    debugPrint(suggestionList[index]);
+                    showPopup(context, suggestionList[index], imageList[index],
+                        Listview.description2[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                  },
+                  child: Card(
+                    color: Color(0xffF5F5F5),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      borderRadius:
+                      const BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Row(
                       children: [
                         SizedBox(
-                            height: 10 * (deviceHeight / standardDeviceHeight)),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 120 * (deviceWidth / standardDeviceWidth),
-                              child: Text(
-                                suggestionList[index],
-                                style: const TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-
-                            SizedBox(
-                              width: 70 * (deviceWidth / standardDeviceWidth),
-                              child: Container(
-                                child: Text(
-                                  Listview.description1[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color(0xffF28220)),
-                                ),
-                                //margin: const EdgeInsets.all(10.0),
-                                width: 100.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0xffFEF0E3),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 70 * (deviceWidth / standardDeviceWidth),
-                              child: Container(
-                                child: Text(
-                                  Listview.description2[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color(0xff3FD69F)),
-                                ),
-                                //margin: const EdgeInsets.all(10.0),
-                                width: 100.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0xffE7FAF7),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 35 * (deviceWidth / standardDeviceWidth),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                alreadySaved
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color:
-                                alreadySaved ? Colors.red : null,
-                                semanticLabel: alreadySaved
-                                    ? 'Remove from saved'
-                                    : 'Save',
-                              ),
-                              onPressed: () {
-                                // setState(() {
-                                //   if (alreadySaved) {
-                                //     final heartCollectionReference = FirebaseFirestore.instance.collection(
-                                //         "users").doc(FirebaseAuth.instance.currentUser!.displayName);
-                                //     heartCollectionReference.update(
-                                //         {'heart': FieldValue.arrayRemove([Listview.titleList[index]])});
-                                //     Listview.saved.remove(Listview.titleList[index]);
-                                //   } else {
-                                //     final heartCollectionReference = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.displayName);
-                                //     heartCollectionReference.update({'heart':FieldValue.arrayUnion([Listview.titleList[index]])});
-                                //     Listview.saved.add(Listview.titleList[index]);
-                                //   }
-                                // });
-                              },
-                            ),
-                          ],
+                            height: 50 * (deviceHeight / standardDeviceHeight),
+                            width: 30 * (deviceWidth / standardDeviceWidth)
                         ),
-                        SizedBox(
-                            height: 10 * (deviceHeight / standardDeviceHeight)),
-                      ], //children
+                        Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                  height: 10 * (deviceHeight / standardDeviceHeight)
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 120 * (deviceWidth / standardDeviceWidth),
+                                    child: Text(
+                                      suggestionList[index],
+                                      style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 70 * (deviceWidth / standardDeviceWidth),
+                                    child: Container(
+                                      child: Text(
+                                        Listview.description1[Listview.titleList.indexOf(suggestionList[index])],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Color(0xffF28220)
+                                        ),
+                                      ),
+                                      //margin: const EdgeInsets.all(10.0),
+                                      width: 100.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFEF0E3),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 70 * (deviceWidth / standardDeviceWidth),
+                                    child: Container(
+                                      child: Text(
+                                        Listview.description2[Listview.titleList.indexOf(suggestionList[index])],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Color(0xff3FD69F)
+                                        ),
+                                      ),
+                                      width: 100.0,
+                                      height: 20.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffE7FAF7),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 35 * (deviceWidth / standardDeviceWidth),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      alreadySaved
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color:
+                                      alreadySaved ? Colors.red : null,
+                                      semanticLabel: alreadySaved
+                                          ? 'Remove from saved'
+                                          : 'Save',
+                                    ),
+                                    onPressed: () async {
+                                      if (alreadySaved) {
+                                        await deleteHeartDoc(suggestionList[index]);
+                                      } else {
+                                        await createHeartDoc(suggestionList[index]);
+                                      }
+                                      setState(() {
+                                        if (alreadySaved) {
+                                          Listview.saved.remove(suggestionList[index]);
+                                        } else {
+                                          Listview.saved.add(suggestionList[index]);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                  height: 10 * (deviceHeight / standardDeviceHeight)
+                              ),
+                            ], //children
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
           );
-        },
-      ),
-    );
+        });
   }
 }

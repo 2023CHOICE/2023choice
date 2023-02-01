@@ -13,6 +13,7 @@ class Question13 extends StatelessWidget {
   static String character = '';
   static List<String> listName = [];
   static int colorNum = 0;
+  static String picUrl = "";
 
 
   @override
@@ -38,27 +39,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   Future<void> getData(String que_result) async {
-    print("M: " + Profile.m.toString());
-    print("W: " + Profile.w.toString());
-    print("H: " + Profile.h.toString());
-    print("Y: " + Profile.y.toString());
-    print("D: " + Profile.d.toString());
-    print("B: " + Profile.b.toString());
-    print("dance: " + Profile.nlist[0].toString());
-    print("sing: " + Profile.nlist[1].toString());
-    print("inst: " + Profile.nlist[2].toString());
-    print("band: " + Profile.nlist[3].toString());
-    print("tool: " + Profile.tool.toString());
-    print("body: " + Profile.body.toString());
-    print("com: " + Profile.com.toString());
-    print("study: " + Profile.study.toString());
-    print("volunteer: " + Profile.volunteer.toString());
-
     var result = await FirebaseFirestore.instance.collection("result").doc(
         que_result).get();
-    print(result['character']);
+    Question13.picUrl = result['picUrl'];
     Question13.character = result['character'];
-    print(result['color']);
     Question13.colorNum = result['color'];
 
     var snapshots = await FirebaseFirestore.instance.collection("result").doc(
@@ -66,7 +50,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     for (var doc in snapshots.docs) {
       Question13.listName.add(doc.id);
     }
-    print(Question13.listName);
   }
 
   @override
@@ -170,7 +153,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 onPressed: () async{
                                   Profile.b += 10;
                                   String result = Profile.getResult();
-                                  print(result);
                                   await getData(result);
                                   Navigator.push(
                                     context,
@@ -198,7 +180,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 onPressed: () async {
                                   Profile.d += 10;
                                   String result = Profile.getResult();
-                                  print(result);
                                   await getData(result);
                                   Navigator.push(
                                     context,

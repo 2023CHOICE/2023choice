@@ -1,5 +1,6 @@
 import 'package:choice/func/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:confetti/confetti.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -32,6 +33,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
+  List<int> imageNum = [Random().nextInt(16) + 1,Random().nextInt(16) + 1,Random().nextInt(16) + 1,Random().nextInt(16) + 1];
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -54,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
-  Future<void> getResultList() async{
+  Future<void> getResultList() async {
     var result = await FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.displayName)
@@ -62,14 +64,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         .get();
 
     for (var doc in result.docs) {
-        Result.resultName.add(doc.get('character'));
-      }
-    print("Result.resultName : ");
-    print(Result.resultName);
-
+      Result.resultName.add(doc.get('character'));
+      Result.resultTime.add(doc.get('dateTime'));
+    }
   }
 
-  Future<void> getHeartList() async{
+  Future<void> getHeartList() async {
     var heart = await FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.displayName)
@@ -79,9 +79,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     for (var doc in heart.docs) {
       Listview.saved.add(doc.get('listName'));
     }
-    print("Listview.saved : ");
-    print(Listview.saved);
-
   }
 
   Future<void> setData() async {
@@ -101,6 +98,39 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Profile.com = 0;
     Profile.volunteer = 0;
     Question13.listName.clear();
+    Question13.picUrl = "";
+  }
+
+  ConfettiController _controllerCenter = ConfettiController();
+
+  @override
+  void initState() {
+    _controllerCenter =
+        ConfettiController(duration: const Duration(seconds: 10));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controllerCenter.dispose();
+    super.dispose();
+  }
+
+  Path drawHeart(Size size) {
+    double width = size.width;
+    double height = size.height;
+
+    Path path = Path();
+
+    path.moveTo(0.5 * width, height * 0.35);
+    path.cubicTo(0.2 * width, height * 0.1, -0.25 * width, height * 0.6,
+        0.5 * width, height);
+    path.moveTo(0.5 * width, height * 0.35);
+    path.cubicTo(0.8 * width, height * 0.1, 1.25 * width, height * 0.6,
+        0.5 * width, height);
+
+    path.close();
+    return path;
   }
 
   @override
@@ -117,147 +147,186 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          return SafeArea(
+            child: Stack(
               children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(300, 50, 10, 0),
-                    color: Colors.white,
-                    height: 1.0,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            //to set border radius to button
-                            borderRadius: BorderRadius.circular(10)),
-                        minimumSize: const Size(20, 20),
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black45,
-                        side: const BorderSide(
-                          width: 2.0,
-                          color: Colors.black45,
+                Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(300, 30, 10, 0),
+                          color: Colors.white,
+                          height: 0.5,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  //to set border radius to button
+                                  borderRadius: BorderRadius.circular(10)),
+                              minimumSize: const Size(30, 30),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black45,
+                              side: const BorderSide(
+                                width: 2.0,
+                                color: Colors.black45,
+                              ),
+                            ),
+                            child: Text(
+                              'logout',
+                              style: TextStyle(
+                                  fontSize: 11, fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
+                            },
+                          ),
                         ),
                       ),
-                      child: Text(
-                        'logout',
-                        style: TextStyle(
-                            fontSize: 11, fontWeight: FontWeight.bold),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                          color: Colors.white,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text('${snapshot.data?.displayName}의\n',
+                                    style: TextStyle(
+                                      height: 0.1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center),
+                                Text('CHOICE!',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 40,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                      },
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    color: Colors.white,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text('${snapshot.data?.displayName}의\n',
-                              style: TextStyle(
-                                height: 0.1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.center),
-                          Text('CHOICE!',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 40,
-                                color: Colors.black,
-                              ),
-                              textAlign: TextAlign.center),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 180 * (deviceHeight / standardDeviceHeight),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Expanded(
+                        flex: 9,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                          color: Colors.white,
+                          child: Column(
                             children: [
-                              Character(),
-                              Character(),
+                              SizedBox(
+                                height:
+                                    180 * (deviceHeight / standardDeviceHeight),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Character(0,_controllerCenter,imageNum, imageNum[0]),
+                                    Character(1,_controllerCenter,imageNum, imageNum[1]),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height:
+                                    20 * (deviceHeight / standardDeviceHeight),
+                              ),
+                              SizedBox(
+                                height:
+                                    180 * (deviceHeight / standardDeviceHeight),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Character(2,_controllerCenter,imageNum,imageNum[2]),
+                                    Character(3,_controllerCenter,imageNum,imageNum[3]),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 20 * (deviceHeight / standardDeviceHeight),
-                        ),
-                        SizedBox(
-                          height: 180 * (deviceHeight / standardDeviceHeight),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Character(),
-                              Character(),
-                            ],
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 50,
+                            vertical: 10,
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                      vertical: 20,
-                    ),
-                    color: Colors.white,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            //to set border radius to button
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
-                        side: const BorderSide(
-                          width: 3.0,
-                          color: Colors.black,
+                          color: Colors.white,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  //to set border radius to button
+                                  borderRadius: BorderRadius.circular(10)),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
+                              side: const BorderSide(
+                                width: 3.0,
+                                color: Colors.black,
+                              ),
+                              minimumSize: const Size(380, 30),
+                            ),
+                            child: Text(
+                              '테스트 시작하기',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Question1()),
+                              );
+                            },
+                          ),
                         ),
-                        minimumSize: const Size(380, 30),
                       ),
-                      child: Text(
-                        '테스트 시작하기',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Question1()),
-                        );
-                      },
-                    ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 50,
+                            vertical: 10,
+                          ),
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                  // child: TextButton(
+                  //   onPressed: () {
+                  //     _controllerCenter.play();
+                  //   },
+                  //   child: Text(
+                  //     '폭죽 터뜨리기',
+                  //     style:
+                  //       TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  //   ),
+                  // ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ConfettiWidget(
+                    confettiController: _controllerCenter,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    shouldLoop: true,
+                    colors: const [
+                      Colors.green,
+                      Colors.blue,
+                      Colors.pink,
+                      Colors.orange,
+                      Colors.purple
+                    ],
+                    createParticlePath: drawHeart,
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                      vertical: 20,
-                    ),
-                    color: Colors.white,
-                  ),
-                )
               ],
             ),
           );
@@ -304,12 +373,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 }
 
 class Character extends StatefulWidget {
+  int imageIndex;
+  List<int> imageNum;
+  int characterNumber;
+  ConfettiController _controllerCenter;
+  Character(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
   @override
-  _CharacterState createState() => _CharacterState();
+  _CharacterState createState() => _CharacterState(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
 }
 
 class _CharacterState extends State<Character> {
-  int characterNumber = Random().nextInt(16) + 1;
+  int imageIndex;
+  List<int> imageNum;
+  int characterNumber;
+  ConfettiController _controllerCenter;
+  _CharacterState(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
 
   @override
   Widget build(BuildContext context) {
@@ -318,6 +396,11 @@ class _CharacterState extends State<Character> {
         onPressed: () {
           setState(() {
             characterNumber = Random().nextInt(16) + 1;
+            this.imageNum[this.imageIndex] = characterNumber;
+            if(this.imageNum[0]==this.imageNum[1]&&this.imageNum[1]==this.imageNum[2]&&this.imageNum[2]==this.imageNum[3]) {
+              print("모두 같음");
+              _controllerCenter.play();
+            }
           });
         },
         child: Image.asset('assets/images/home/$characterNumber.png'),
