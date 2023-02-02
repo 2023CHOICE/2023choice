@@ -33,7 +33,12 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
-  List<int> imageNum = [Random().nextInt(16) + 1,Random().nextInt(16) + 1,Random().nextInt(16) + 1,Random().nextInt(16) + 1];
+  List<int> imageNum = [
+    Random().nextInt(16) + 1,
+    Random().nextInt(16) + 1,
+    Random().nextInt(16) + 1,
+    Random().nextInt(16) + 1
+  ];
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -52,6 +57,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Listview.titleList.add(doc.id);
         Listview.description1.add(doc.get('result1'));
         Listview.description2.add(doc.get('result2'));
+        Listview.detail.add(doc.get('detail'));
+        Listview.activity.add(doc.get('activity'));
+        Listview.semester.add(doc.get('semester'));
+        Listview.time.add(doc.get('time'));
+
       }
     });
   }
@@ -61,12 +71,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.displayName)
         .collection("testResult")
+        // .orderBy("timestamp", descending: true)
         .get();
 
     for (var doc in result.docs) {
       Result.resultName.add(doc.get('character'));
       Result.resultTime.add(doc.get('dateTime'));
+      var name = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.displayName)
+          .collection("testResult")
+          .doc(doc.get('character'))
+          .collection('listName')
+          .get();
+      List<String> list = [];
+      for (var n in name.docs) {
+        list.add(n.get('list'));
+      }
+      Result.resultListName.add(list);
     }
+
+    print(Result.resultListName);
   }
 
   Future<void> getHeartList() async {
@@ -139,7 +164,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     if (Listview.saved.isEmpty) getHeartList();
     if (Listview.titleList.isEmpty &&
         Listview.description1.isEmpty &&
-        Listview.description2.isEmpty) getData();
+        Listview.description2.isEmpty &&
+        Listview.detail.isEmpty &&
+        Listview.semester.isEmpty &&
+        Listview.activity.isEmpty  &&
+        Listview.time.isEmpty) getData();
     setData();
     final deviceHeight = MediaQuery.of(context).size.height;
     final standardDeviceHeight = 900;
@@ -227,8 +256,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Character(0,_controllerCenter,imageNum, imageNum[0]),
-                                    Character(1,_controllerCenter,imageNum, imageNum[1]),
+                                    Character(0, _controllerCenter, imageNum,
+                                        imageNum[0]),
+                                    Character(1, _controllerCenter, imageNum,
+                                        imageNum[1]),
                                   ],
                                 ),
                               ),
@@ -243,8 +274,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Character(2,_controllerCenter,imageNum,imageNum[2]),
-                                    Character(3,_controllerCenter,imageNum,imageNum[3]),
+                                    Character(2, _controllerCenter, imageNum,
+                                        imageNum[2]),
+                                    Character(3, _controllerCenter, imageNum,
+                                        imageNum[3]),
                                   ],
                                 ),
                               )
@@ -377,9 +410,13 @@ class Character extends StatefulWidget {
   List<int> imageNum;
   int characterNumber;
   ConfettiController _controllerCenter;
-  Character(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
+
+  Character(this.imageIndex, this._controllerCenter, this.imageNum,
+      this.characterNumber);
+
   @override
-  _CharacterState createState() => _CharacterState(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
+  _CharacterState createState() => _CharacterState(this.imageIndex,
+      this._controllerCenter, this.imageNum, this.characterNumber);
 }
 
 class _CharacterState extends State<Character> {
@@ -387,7 +424,9 @@ class _CharacterState extends State<Character> {
   List<int> imageNum;
   int characterNumber;
   ConfettiController _controllerCenter;
-  _CharacterState(this.imageIndex, this._controllerCenter, this.imageNum, this.characterNumber);
+
+  _CharacterState(this.imageIndex, this._controllerCenter, this.imageNum,
+      this.characterNumber);
 
   @override
   Widget build(BuildContext context) {
@@ -397,7 +436,9 @@ class _CharacterState extends State<Character> {
           setState(() {
             characterNumber = Random().nextInt(16) + 1;
             this.imageNum[this.imageIndex] = characterNumber;
-            if(this.imageNum[0]==this.imageNum[1]&&this.imageNum[1]==this.imageNum[2]&&this.imageNum[2]==this.imageNum[3]) {
+            if (this.imageNum[0] == this.imageNum[1] &&
+                this.imageNum[1] == this.imageNum[2] &&
+                this.imageNum[2] == this.imageNum[3]) {
               print("모두 같음");
               _controllerCenter.play();
             }

@@ -13,6 +13,7 @@ class Result extends StatelessWidget {
 
   static const String _title = 'Flutter Code Sample';
   static List<String> resultName = [];
+  static List<List<String>> resultListName = [];
   static List<String> resultTime = [];
 
   @override
@@ -47,6 +48,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       "character": name,
       "dateTime": DateFormat.yMd().add_jm().format(DateTime.now()),
     });
+    for(int i = 0; i< Question13.listName.length; i++){
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.displayName)
+          .collection("testResult")
+          .doc(name)
+          .collection('listName')
+          .doc(Question13.listName[i])
+          .set({
+        'list': Question13.listName[i],
+      });
+    }
     print("결과 문서 생성 성공!");
   }
 
@@ -193,7 +206,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 Row(
                                   children: [
                                     SizedBox(
-                                      width: 120 *
+                                      width: 140 *
                                           (deviceWidth / standardDeviceWidth),
                                       child: Text(
                                         Question13.listName[index],
@@ -251,7 +264,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 35 *
+                                      width: 30 *
                                           (deviceWidth / standardDeviceWidth),
                                     ),
                                     IconButton(
@@ -327,6 +340,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPressed: () async {
                   await createResultDoc(Question13.character);
                   Result.resultName.add(Question13.character);
+                  Result.resultListName.add(Question13.listName);
                   Result.resultTime.add(DateFormat.yMd().add_jm().format(DateTime.now()));
                   Navigator.push(
                     context,

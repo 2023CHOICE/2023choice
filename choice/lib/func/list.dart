@@ -10,6 +10,10 @@ class Listview extends StatelessWidget {
   static List<String> titleList = [];
   static List<String> description1 = [];
   static List<String> description2 = [];
+  static List<String> detail = [];
+  static List<String> activity = [];
+  static List<String> semester = [];
+  static List<String> time= [];
   static List<String> saved = [];
 
   @override
@@ -47,23 +51,8 @@ class _ListViewPageState extends State<ListViewPage> {
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  var detail = [
-    '전산분과 프로젝트 동아리'
-  ];
 
-  var desc1 = [
-    '- 학관 2층에 위치하고 있습니다.'
-  ];
-  var desc2 = [
-    '- 매주 월요일 7~8시에 정모가 있습니다.'
-  ];
-  var desc3 = [
-    '- 필수 학기는 2학기입니다.'
-  ];
-
-  var imageList = ['assets/images/1.png'];
-
-  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
+  void showPopup(context, title, description, detail, desc1, desc2, desc3) {
     showDialog(
       context: context,
       builder: (context) {
@@ -104,42 +93,41 @@ class _ListViewPageState extends State<ListViewPage> {
                     detail,
                     maxLines: 3,
                     style: TextStyle(fontSize: 15, color: Colors.grey[500]),
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 60,
+                        width: 105,
                       ),
                       Column(
                         children: [
-                          Text(
-                            desc1,
+                          Text('활동: '+
+                              desc1,
                             style: const TextStyle(
                                 fontSize: 15,
                                 //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc2,
+                          Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
                                 //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc3,
+                          Text('시간: '
+                              +desc3,
                             style: const TextStyle(
                                 fontSize: 15,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       )
@@ -215,8 +203,8 @@ class _ListViewPageState extends State<ListViewPage> {
                     return InkWell(
                       onTap: () {
                         debugPrint(Listview.titleList[index]);
-                        showPopup(context, Listview.titleList[index], imageList[index],
-                            Listview.description1[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                        showPopup(context, Listview.titleList[index],
+                            Listview.description1[index], Listview.detail[index], Listview.activity[index], Listview.semester[index],Listview.time[index]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
@@ -243,7 +231,7 @@ class _ListViewPageState extends State<ListViewPage> {
                                   Row(
                                     children: [
                                       SizedBox(
-                                        width: 120 * (deviceWidth / standardDeviceWidth),
+                                        width: 140 * (deviceWidth / standardDeviceWidth),
                                         child: Text(
                                           Listview.titleList[index],
                                           style: const TextStyle(
@@ -293,7 +281,7 @@ class _ListViewPageState extends State<ListViewPage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 35 * (deviceWidth / standardDeviceWidth),
+                                        width: 30 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
                                         icon: Icon(
@@ -382,7 +370,7 @@ class _ListViewPageState extends State<ListViewPage> {
 }
 
 class Search extends SearchDelegate {
-  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
+  void showPopup(context, title, description, detail, desc1, desc2, desc3) {
     showDialog(
       context: context,
       builder: (context) {
@@ -423,40 +411,41 @@ class Search extends SearchDelegate {
                     detail,
                     maxLines: 3,
                     style: TextStyle(fontSize: 15, color: Colors.grey[500]),
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 60,
+                        width: 105,
                       ),
                       Column(
                         children: [
-                          Text(
-                            desc1,
+                          Text('활동: '+
+                              desc1,
                             style: const TextStyle(
                                 fontSize: 15,
+                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc2,
+                          Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
+                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc3,
+                          Text('시간: '
+                              +desc3,
                             style: const TextStyle(
                                 fontSize: 15,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       )
@@ -539,22 +528,6 @@ class Search extends SearchDelegate {
           .collection("heartList").doc(name).delete();
     }
 
-    var detail = [
-      '전산분과 프로젝트 동아리'
-    ];
-
-    var desc1 = [
-      '- 학관 2층에 위치하고 있습니다.'
-    ];
-    var desc2 = [
-      '- 매주 월요일 7~8시에 정모가 있습니다.'
-    ];
-    var desc3 = [
-      '- 필수 학기는 2학기입니다.'
-    ];
-
-    var imageList = ['assets/images/1.png'];
-
     query.isEmpty
         ? suggestionList = [] //In the true case
         : suggestionList.addAll(listExample.where(
@@ -571,8 +544,8 @@ class Search extends SearchDelegate {
                 return InkWell(
                   onTap: () {
                     debugPrint(suggestionList[index]);
-                    showPopup(context, suggestionList[index], imageList[index],
-                        Listview.description2[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                    showPopup(context, suggestionList[index],
+                        Listview.description1[Listview.titleList.indexOf(suggestionList[index])], Listview.detail[Listview.titleList.indexOf(suggestionList[index])], Listview.activity[Listview.titleList.indexOf(suggestionList[index])], Listview.semester[Listview.titleList.indexOf(suggestionList[index])],Listview.time[Listview.titleList.indexOf(suggestionList[index])]);
                   },
                   child: Card(
                     color: Color(0xffF5F5F5),
@@ -599,7 +572,7 @@ class Search extends SearchDelegate {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 120 * (deviceWidth / standardDeviceWidth),
+                                    width: 140 * (deviceWidth / standardDeviceWidth),
                                     child: Text(
                                       suggestionList[index],
                                       style: const TextStyle(
@@ -648,7 +621,7 @@ class Search extends SearchDelegate {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 35 * (deviceWidth / standardDeviceWidth),
+                                    width: 30 * (deviceWidth / standardDeviceWidth),
                                   ),
                                   IconButton(
                                     icon: Icon(

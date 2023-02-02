@@ -117,56 +117,59 @@ class _ProfilePageState extends State<ProfilePage> {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           child: Container(
             width: MediaQuery.of(context).size.width * 1.0,
-            height: 220,
+            height: 500,
             decoration: BoxDecoration(
                 border: Border.all(
                     color: Colors.black, width: 1.0, style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular(30),
                 color: Colors.white),
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                Text(
-                  title,
-                  style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                  textAlign: TextAlign.left,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    detail,
-                    maxLines: 3,
-                    style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 30),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                     textAlign: TextAlign.left,
                   ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 60,
-                      ),
-                      Text(
-                        desc,
-                        style: const TextStyle(
-                            fontSize: 15,
-                            //fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      detail,
+                      maxLines: 3,
+                      style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                ),
-                IconButton(
-                    color: Colors.black,
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-              ],
+                  const SizedBox(height: 10),
+                  Container(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 95,
+                        ),
+                        Text(
+                          desc,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              //fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                      color: Colors.black,
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                ],
+              ),
             ),
           ),
         );
@@ -174,7 +177,21 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  final ScrollController _scrollController = ScrollController();
+  _buildExpandableContent(List<String> namelist) {
+    List<Widget> columnContent = [];
+
+    for (String content in namelist)
+      columnContent.add(
+        ListTile(
+          title: Text(
+            content,
+            style: TextStyle(fontSize: 18.0),
+          ),
+        ),
+      );
+
+    return columnContent;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,154 +229,238 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               body: Column(
-                  children: <Widget>[
-                    SizedBox(
-                        height: 20 * (deviceHeight / standardDeviceHeight)),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        color: Colors.white,
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.account_circle,
+                children: <Widget>[
+                  SizedBox(height: 20 * (deviceHeight / standardDeviceHeight)),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      color: Colors.white,
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.account_circle,
+                            ),
+                            SizedBox(
+                              width: 10 * (deviceHeight / standardDeviceHeight),
+                            ),
+                            Text(
+                              '개인프로필',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black,
                               ),
-                              SizedBox(
-                                width:
-                                10 * (deviceHeight / standardDeviceHeight),
-                              ),
-                              Text(
-                                '개인프로필',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      color: Colors.white,
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                        color: Colors.white,
-                        child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.face_retouching_natural,
+                                    size: 130,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                    10 * (deviceHeight / standardDeviceHeight),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${snapshot.data?.displayName}',
+                                        style: TextStyle(
+                                          height: 1,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10 *
+                                            (deviceHeight / standardDeviceHeight),
+                                      ),
+                                      Text(
+                                        '${snapshot.data?.email}',
+                                        style: TextStyle(
+                                          height: 1,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10 * (deviceHeight / standardDeviceHeight),
+                              ),
+                              Container(
+                                height: 1.0,
+                                width: 500.0,
+                                color: Colors.black,
+                              ),
+                            ],
+                          )),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      color: Colors.white,
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.update,
+                            ),
+                            SizedBox(
+                              width: 10 * (deviceHeight / standardDeviceHeight),
+                            ),
+                            Text(
+                              '최근 테스트 결과',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      color: Colors.white,
+                      child: ListView.builder(
+                          itemCount: Result.resultName.length,
+                          itemBuilder: (context, index) {
+                            return ExpansionTile(
+                              title: Row(
                                   children: [
-                                    Icon(
-                                      Icons.face_retouching_natural,
-                                      size: 130,
-                                    ),
-                                    SizedBox(
-                                      width: 10 *
-                                          (deviceHeight / standardDeviceHeight),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${snapshot.data?.displayName}',
-                                          style: TextStyle(
-                                            height: 1,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Colors.black,
+                                    // SizedBox(
+                                    //     height: 50 *
+                                    //         (deviceHeight / standardDeviceHeight),
+                                    //     width: 30 *
+                                    //         (deviceWidth / standardDeviceWidth)),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2),
+                                      child:Container(
+                                          width: 330.0,
+                                          height: 50.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xffF5F5F5),
+                                            borderRadius:
+                                            BorderRadius.circular(20),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 10 *
-                                              (deviceHeight / standardDeviceHeight),
-                                        ),
-                                        Text(
-                                          '${snapshot.data?.email}',
-                                          style: TextStyle(
-                                            height: 1,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height:
-                                  10 * (deviceHeight / standardDeviceHeight),
-                                ),
-                                Container(
-                                  height: 1.0,
-                                  width: 500.0,
-                                  color: Colors.black,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                  height: 10 *
+                                                      (deviceHeight /
+                                                          standardDeviceHeight)
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 20 *
+                                                        (deviceWidth /
+                                                            standardDeviceWidth),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 120 *
+                                                        (deviceWidth /
+                                                            standardDeviceWidth),
+                                                    child: Text(
+                                                      Result.resultName[index],
+                                                      style: const TextStyle(
+                                                        fontSize: 22,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30 *
+                                                        (deviceWidth /
+                                                            standardDeviceWidth),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 130 *
+                                                        (deviceWidth /
+                                                            standardDeviceWidth),
+                                                    child: Container(
+                                                      child: Text(
+                                                        Result.resultTime[index],
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            color: Color(0xffF28220)),
+                                                      ),
+                                                      width: 100.0,
+                                                      height: 20.0,
+                                                      decoration: BoxDecoration(
+                                                        color: Color(0xffFEF0E3),
+                                                        borderRadius:
+                                                        BorderRadius.circular(20),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                  height: 10 *
+                                                      (deviceHeight /
+                                                          standardDeviceHeight)
+                                              ),
+                                            ], //children
+                                          )
+                                      ),
+                                    ),
+                                  ]),
+                              children: <Widget>[
+                                Column(
+                                  children: _buildExpandableContent(
+                                      Result.resultListName[index]),
                                 ),
                               ],
-                            )),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        color: Colors.white,
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.update,
-                              ),
-                              SizedBox(
-                                width:
-                                10 * (deviceHeight / standardDeviceHeight),
-                              ),
-                              Text(
-                                '최근 테스트 결과',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.black,
+                            );
+                            return Card(
+                              color: Color(0xffF5F5F5),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Theme.of(context).colorScheme.outline,
                                 ),
+                                borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        color: Colors.white,
-                        child: ListView.builder(
-                              itemCount: Result.resultName.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  color: Color(0xffF5F5F5),
-                                  shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      color:
-                                      Theme.of(context).colorScheme.outline,
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
-                                  ),
-                                  child: Row(children: [
+                              child: Row(
+                                  children: [
                                     SizedBox(
                                         height: 50 *
-                                            (deviceHeight /
-                                                standardDeviceHeight),
+                                            (deviceHeight / standardDeviceHeight),
                                         width: 30 *
-                                            (deviceWidth /
-                                                standardDeviceWidth)),
+                                            (deviceWidth / standardDeviceWidth)),
                                     Padding(
                                       padding: const EdgeInsets.all(2),
                                       child: Column(
@@ -403,16 +504,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontSize: 15,
-                                                        color:
-                                                        Color(0xffF28220)),
+                                                        color: Color(0xffF28220)),
                                                   ),
                                                   width: 100.0,
                                                   height: 20.0,
                                                   decoration: BoxDecoration(
                                                     color: Color(0xffFEF0E3),
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        20),
+                                                    BorderRadius.circular(20),
                                                   ),
                                                 ),
                                               ),
@@ -421,65 +520,61 @@ class _ProfilePageState extends State<ProfilePage> {
                                           SizedBox(
                                               height: 10 *
                                                   (deviceHeight /
-                                                      standardDeviceHeight)
-                                          ),
+                                                      standardDeviceHeight)),
                                         ], //children
                                       ),
                                     ),
                                   ]),
-                                );
-                              }),
-                      ),
+                            );
+                          }),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                        color: Colors.white,
-                        child: Center(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 1.0,
-                                  width: 500.0,
-                                  color: Colors.black,
-                                ),
-                                SizedBox(
-                                    height:
-                                    10 * (deviceHeight / standardDeviceHeight)),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.add_circle_outline,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      color: Colors.white,
+                      child: Center(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 1.0,
+                                width: 500.0,
+                                color: Colors.black,
+                              ),
+                              SizedBox(
+                                  height:
+                                  10 * (deviceHeight / standardDeviceHeight)),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.add_circle_outline,
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.red, // foreground
+                                      backgroundColor: Colors.white,
                                     ),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.red, // foreground
-                                        backgroundColor: Colors.white,
-                                      ),
-                                      child: Text('학회에 대해 궁금하시다면??',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 20,
-                                            color: Colors.black54,
-                                          ),
-                                          textAlign: TextAlign.center),
-                                      onPressed: () {
-                                        showPopup(
-                                            context,
-                                            "한동대학교 학회",
-                                            "각 전공별 학회 리스트",
-                                            "- 경영경제학부\n컬러즈\n정치경제학회\n- 공간시스템공학부\n한.땅\n공기");
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                      ),
+                                    child: Text('학회에 대해 궁금하시다면??',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 20,
+                                          color: Colors.black54,
+                                        ),
+                                        textAlign: TextAlign.center),
+                                    onPressed: () {
+                                      showPopup(context, "한동대학교 학회", "각 전공별 학회 리스트",
+                                          "<경영경제학부>\n컬러즈\n정치경제학회\n———————————\n<공간시스템공학부>\n한.땅\n공기\n———————————\n<국제어문학부>\n살루스\n한동교육학회\n———————————\n<기계제어학부>\n하다\n———————————\n<법학부>\n하나인\n고전강독학회\n———————————\n<상담복지학부>\n한동마음지킴이\n예술심리치료학회\n———————————\n<ICT창업학부>\nBEST\nSirius\n———————————\n<전산전자공학부>\n시선\nSODA\n———————————\n<커뮤케이션학부>\n언로너스\n카존\n———————————\n<콘텐융합디자인학부>\n도트\n매직\n———————————\n<생과학학부>\n로직 디자이너스");
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             );
           }),
       bottomNavigationBar: BottomNavigationBar(

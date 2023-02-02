@@ -41,7 +41,7 @@ class _LikePageState extends State<LikePage> {
         .collection("heartList").doc(name).delete();
   }
 
-  void showPopup(context, title, image, description, detail, String desc1, String desc2, String desc3) {
+  void showPopup(context, title, description, detail, desc1, desc2, desc3) {
     showDialog(
       context: context,
       builder: (context) {
@@ -82,40 +82,41 @@ class _LikePageState extends State<LikePage> {
                     detail,
                     maxLines: 3,
                     style: TextStyle(fontSize: 15, color: Colors.grey[500]),
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 60,
+                        width: 105,
                       ),
                       Column(
                         children: [
-                          Text(
-                            desc1,
+                          Text('활동: '+
+                              desc1,
                             style: const TextStyle(
                                 fontSize: 15,
+                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc2,
+                          Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
+                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
-                          Text(
-                            desc3,
+                          Text('시간: '
+                              +desc3,
                             style: const TextStyle(
                                 fontSize: 15,
                                 color: Colors.black
                             ),
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       )
@@ -192,9 +193,9 @@ class _LikePageState extends State<LikePage> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        debugPrint(Listview.titleList[index]);
-                        showPopup(context, Listview.titleList[index], imageList[index],
-                            Listview.description1[index], detail[index], desc1[index], desc2[index], desc3[index]);
+                        debugPrint(Listview.saved[index]);
+                        showPopup(context, Listview.saved[index],
+                            Listview.description1[Listview.titleList.indexOf(Listview.saved[index])], Listview.detail[Listview.titleList.indexOf(Listview.saved[index])], Listview.activity[Listview.titleList.indexOf(Listview.saved[index])], Listview.semester[Listview.titleList.indexOf(Listview.saved[index])],Listview.time[Listview.titleList.indexOf(Listview.saved[index])]);
                       },
                       child: Card(
                         color: Color(0xffF5F5F5),
@@ -221,7 +222,7 @@ class _LikePageState extends State<LikePage> {
                                   Row(
                                     children: [
                                       SizedBox(
-                                        width: 120 * (deviceWidth / standardDeviceWidth),
+                                        width: 140 * (deviceWidth / standardDeviceWidth),
                                         child: Text(
                                           Listview.saved[index],
                                           style: const TextStyle(
@@ -268,7 +269,7 @@ class _LikePageState extends State<LikePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 35 * (deviceWidth / standardDeviceWidth),
+                                        width: 30 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
                                           icon: selected
