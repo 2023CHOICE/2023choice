@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:choice/func/like.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -105,8 +103,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   int current_index = 3;
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   void showPopup(context, title, detail, String desc) {
     showDialog(
@@ -122,7 +119,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 border: Border.all(
                     color: Colors.black, width: 1.0, style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular(30),
-                color: Colors.white),
+                color: Colors.white
+            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -132,7 +130,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color: Colors.black
+                    ),
                     textAlign: TextAlign.left,
                   ),
                   Padding(
@@ -140,7 +139,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text(
                       detail,
                       maxLines: 3,
-                      style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey[500]
+                      ),
                       textAlign: TextAlign.left,
                     ),
                   ),
@@ -155,8 +157,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           desc,
                           style: const TextStyle(
                               fontSize: 15,
-                              //fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                              color: Colors.black
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -167,7 +169,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       icon: const Icon(Icons.close),
                       onPressed: () {
                         Navigator.pop(context);
-                      }),
+                      }
+                    ),
                 ],
               ),
             ),
@@ -195,7 +198,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool selected = false;
     Icon first_icon = Icon(Icons.favorite_border);
     Icon second_icon = Icon(Icons.favorite);
 
@@ -221,7 +223,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       fontSize: 40,
                       color: Colors.black,
                     ),
-                    textAlign: TextAlign.center),
+                    textAlign: TextAlign.center
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(100),
@@ -316,7 +319,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.black,
                               ),
                             ],
-                          )),
+                          )
+                      ),
                     ),
                   ),
                   Expanded(
@@ -358,11 +362,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             return ExpansionTile(
                               title: Row(
                                   children: [
-                                    // SizedBox(
-                                    //     height: 50 *
-                                    //         (deviceHeight / standardDeviceHeight),
-                                    //     width: 30 *
-                                    //         (deviceWidth / standardDeviceWidth)),
                                     Padding(
                                       padding: const EdgeInsets.all(2),
                                       child:Container(
@@ -445,88 +444,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ],
                             );
-                            return Card(
-                              color: Color(0xffF5F5F5),
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Theme.of(context).colorScheme.outline,
-                                ),
-                                borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                              ),
-                              child: Row(
-                                  children: [
-                                    SizedBox(
-                                        height: 50 *
-                                            (deviceHeight / standardDeviceHeight),
-                                        width: 30 *
-                                            (deviceWidth / standardDeviceWidth)),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                              height: 10 *
-                                                  (deviceHeight /
-                                                      standardDeviceHeight)),
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 20 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
-                                              ),
-                                              SizedBox(
-                                                width: 120 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
-                                                child: Text(
-                                                  Result.resultName[index],
-                                                  style: const TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 50 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
-                                              ),
-                                              SizedBox(
-                                                width: 130 *
-                                                    (deviceWidth /
-                                                        standardDeviceWidth),
-                                                child: Container(
-                                                  child: Text(
-                                                    Result.resultTime[index],
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        color: Color(0xffF28220)),
-                                                  ),
-                                                  width: 100.0,
-                                                  height: 20.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xffFEF0E3),
-                                                    borderRadius:
-                                                    BorderRadius.circular(20),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                              height: 10 *
-                                                  (deviceHeight /
-                                                      standardDeviceHeight)),
-                                        ], //children
-                                      ),
-                                    ),
-                                  ]),
-                            );
-                          }),
+                        }),
                     ),
                   ),
                   Expanded(
@@ -543,8 +461,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.black,
                               ),
                               SizedBox(
-                                  height:
-                                  10 * (deviceHeight / standardDeviceHeight)),
+                                  height: 10 * (deviceHeight / standardDeviceHeight)
+                              ),
                               Row(
                                 children: [
                                   Icon(
@@ -561,7 +479,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           fontSize: 20,
                                           color: Colors.black54,
                                         ),
-                                        textAlign: TextAlign.center),
+                                        textAlign: TextAlign.center
+                                    ),
                                     onPressed: () {
                                       showPopup(context, "한동대학교 학회", "각 전공별 학회 리스트",
                                           "<경영경제학부>\n컬러즈\n정치경제학회\n———————————\n<공간시스템공학부>\n한.땅\n공기\n———————————\n<국제어문학부>\n살루스\n한동교육학회\n———————————\n<기계제어학부>\n하다\n———————————\n<법학부>\n하나인\n고전강독학회\n———————————\n<상담복지학부>\n한동마음지킴이\n예술심리치료학회\n———————————\n<ICT창업학부>\nBEST\nSirius\n———————————\n<전산전자공학부>\n시선\nSODA\n———————————\n<커뮤케이션학부>\n언로너스\n카존\n———————————\n<콘텐융합디자인학부>\n도트\n매직\n———————————\n<생과학학부>\n로직 디자이너스");
@@ -570,7 +489,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ],
-                          )),
+                          ),
+                      ),
                     ),
                   ),
                 ],

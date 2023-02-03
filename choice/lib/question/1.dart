@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
@@ -29,8 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
   final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +58,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               vertical: 30
                           ),
                           icon: Icon(
-                              Icons.home_outlined, color: Colors.black),
+                              Icons.home_outlined,
+                              color: Colors.black
+                          ),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Home()),
+                                  builder: (context) => Home()
+                              ),
                             );
                           },
                         ),
@@ -80,7 +81,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       child: Center(
                         child: Image.asset(
                           'assets/images/bar/bar1.png',
-                          height: 50 * (deviceWidth / standardDeviceWidth),
+                          height: 50 * (deviceHeight / standardDeviceHeight),
                           width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
@@ -101,14 +102,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   children: [
                     SizedBox(
                       height: 120 * (deviceHeight / standardDeviceHeight),
-                      child: Text('1. 다시 태어나보니 내가 탑급 연예인?\n'
+                      child: Text(
+                          '1. 다시 태어나보니 내가 탑급 연예인?\n'
                           '어떤 연예인이 되고 싶은가?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black,
                           ),
-                          textAlign: TextAlign.center),
+                          textAlign: TextAlign.center
+                      ),
                     ),
                     SizedBox(
                       height: 260 * (deviceHeight / standardDeviceHeight),
@@ -127,11 +130,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Question2()));
+                                            builder: (context) => Question2()
+                                        )
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      //to set border radius to button
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     minimumSize: const Size(120, 120),
@@ -156,11 +160,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Question2()));
+                                            builder: (context) => Question2()
+                                        )
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      //to set border radius to button
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     minimumSize: const Size(120, 120),
@@ -189,11 +194,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Question2()));
+                                            builder: (context) => Question2()
+                                        )
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      //to set border radius to button
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     minimumSize: const Size(120, 120),
@@ -218,11 +224,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Question2()));
+                                            builder: (context) => Question2()
+                                        )
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      //to set border radius to button
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     minimumSize: const Size(120, 120),
@@ -246,11 +253,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Question2()));
+                                            builder: (context) => Question2()
+                                        )
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      //to set border radius to button
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     minimumSize: const Size(120, 120),

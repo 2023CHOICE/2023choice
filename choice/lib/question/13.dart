@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
-import '12.dart';
 
 class Question13 extends StatelessWidget {
   const Question13({super.key});
@@ -35,8 +34,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
   final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   Future<void> getData(String que_result) async {
     var result = await FirebaseFirestore.instance.collection("result").doc(
@@ -80,13 +78,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               vertical: 30
                           ),
                           icon: Icon(
-                              Icons.home_outlined, color: Colors.black),
+                              Icons.home_outlined,
+                              color: Colors.black
+                          ),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Home()),
+                                  builder: (context) => Home()
+                              ),
                             );
                           },
                         ),
@@ -100,7 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       child: Center(
                         child: Image.asset(
                           'assets/images/bar/bar13.png',
-                          height: 50 * (deviceWidth / standardDeviceWidth),
+                          height: 50 * (deviceHeight / standardDeviceHeight),
                           width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
@@ -127,7 +128,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             fontSize: 25,
                             color: Colors.black,
                           ),
-                          textAlign: TextAlign.center),
+                          textAlign: TextAlign.center
+                      ),
                     ),
                     SizedBox(
                       height: 220 * (deviceHeight / standardDeviceHeight),
@@ -138,18 +140,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffB9CAFE),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
                                     textStyle: const TextStyle(
-                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)
+                                ),
                                 child: Text('나 자신의 보람으로 만족한다',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                                 onPressed: () async{
                                   Profile.b += 10;
                                   String result = Profile.getResult();
@@ -157,7 +163,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Result()),
+                                        builder: (context) => Result()
+                                    ),
                                   );
                                 },
                               )),
@@ -165,18 +172,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffFF9281),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
                                     textStyle: const TextStyle(
-                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)
+                                ),
                                 child: Text('무조건 다른 사람들에게\n''보여주고 자랑해야 한다',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                                 onPressed: () async {
                                   Profile.d += 10;
                                   String result = Profile.getResult();
@@ -184,10 +195,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Result()),
+                                        builder: (context) => Result()
+                                    ),
                                   );
                                 },
-                              )),
+                              )
+                          ),
                         ],
                       ),
                     ),

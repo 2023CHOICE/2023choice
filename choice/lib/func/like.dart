@@ -97,7 +97,6 @@ class _LikePageState extends State<LikePage> {
                               desc1,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -105,7 +104,6 @@ class _LikePageState extends State<LikePage> {
                           Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -228,7 +226,8 @@ class _LikePageState extends State<LikePage> {
                                           style: const TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Colors.black
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -258,7 +257,8 @@ class _LikePageState extends State<LikePage> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: Color(0xff3FD69F)),
+                                                color: Color(0xff3FD69F)
+                                            ),
                                           ),
                                           width: 100.0,
                                           height: 20.0,
@@ -272,16 +272,17 @@ class _LikePageState extends State<LikePage> {
                                         width: 30 * (deviceWidth / standardDeviceWidth),
                                       ),
                                       IconButton(
-                                          icon: selected
-                                              ? first_icon
-                                              : second_icon,
-                                          color: Colors.red,
-                                          onPressed: () async {
-                                            await deleteHeartDoc(Listview.saved[index]);
-                                            setState(() {
-                                              Listview.saved.remove(Listview.saved[index]);
-                                            });
-                                          }),
+                                        icon: selected
+                                            ? first_icon
+                                            : second_icon,
+                                        color: Colors.red,
+                                        onPressed: () async {
+                                          await deleteHeartDoc(Listview.saved[index]);
+                                          setState(() {
+                                            Listview.saved.remove(Listview.saved[index]);
+                                          });
+                                        }
+                                      ),
                                     ],
                                   ),
                                   SizedBox(

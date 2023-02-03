@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -37,10 +36,12 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              // color: Colors.white,
               child: Center(
                 child: Text('Choice Login',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500
+                  ),
                 ),
               ),
             ),

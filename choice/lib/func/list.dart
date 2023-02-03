@@ -51,7 +51,6 @@ class _ListViewPageState extends State<ListViewPage> {
   final List<Widget> _children = [Home(), Listview(), Like(), Profile()];
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-
   void showPopup(context, title, description, detail, desc1, desc2, desc3) {
     showDialog(
       context: context,
@@ -92,7 +91,10 @@ class _ListViewPageState extends State<ListViewPage> {
                   child: Text(
                     detail,
                     maxLines: 3,
-                    style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey[500]
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -108,7 +110,6 @@ class _ListViewPageState extends State<ListViewPage> {
                               desc1,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -116,7 +117,6 @@ class _ListViewPageState extends State<ListViewPage> {
                           Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -135,11 +135,11 @@ class _ListViewPageState extends State<ListViewPage> {
                   ),
                 ),
                 IconButton(
-                    color: Colors.black,
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }
+                  color: Colors.black,
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }
                 ),
               ],
             ),
@@ -237,7 +237,8 @@ class _ListViewPageState extends State<ListViewPage> {
                                           style: const TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Colors.black
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -271,7 +272,6 @@ class _ListViewPageState extends State<ListViewPage> {
                                                 color: Color(0xff3FD69F)
                                             ),
                                           ),
-                                          //margin: const EdgeInsets.all(10.0),
                                           width: 100.0,
                                           height: 20.0,
                                           decoration: BoxDecoration(
@@ -426,7 +426,6 @@ class Search extends SearchDelegate {
                               desc1,
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -434,7 +433,6 @@ class Search extends SearchDelegate {
                           Text('필수 학기: '+desc2+'학기',
                             style: const TextStyle(
                                 fontSize: 15,
-                                //fontWeight: FontWeight.bold,
                                 color: Colors.black
                             ),
                             textAlign: TextAlign.center,
@@ -591,8 +589,7 @@ class Search extends SearchDelegate {
                                             fontSize: 15,
                                             color: Color(0xffF28220)
                                         ),
-                                      ),
-                                      //margin: const EdgeInsets.all(10.0),
+                                    ),
                                       width: 100.0,
                                       height: 20.0,
                                       decoration: BoxDecoration(
@@ -664,6 +661,7 @@ class Search extends SearchDelegate {
               },
             ),
           );
-        });
+        }
+      );
   }
 }

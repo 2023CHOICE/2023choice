@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
-import '10.dart';
 import '12.dart';
 
 class Question11 extends StatelessWidget {
@@ -30,8 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
   final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -61,33 +58,35 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               vertical: 30
                           ),
                           icon: Icon(
-                              Icons.home_outlined, color: Colors.black),
+                              Icons.home_outlined,
+                              color: Colors.black),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Home()),
+                                  builder: (context) => Home()
+                              ),
                             );
                           },
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                     Container(
                       color: Colors.white,
                       child: Center(
                         child: Image.asset(
                           'assets/images/bar/bar11.png',
-                          height: 50 * ( deviceWidth / standardDeviceWidth),
-                          width: 350 * ( deviceWidth / standardDeviceWidth),
+                          height: 50 * (deviceHeight / standardDeviceHeight),
+                          width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40 * ( deviceHeight / standardDeviceHeight),
+                      height: 40 * (deviceHeight / standardDeviceHeight),
                     ),
                   ],
                 ),
@@ -101,7 +100,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 120 * ( deviceHeight / standardDeviceHeight),
+                      height: 120 * (deviceHeight / standardDeviceHeight),
                       child: Text('11. 친구가 매주 같이 \n자신이 좋아하는 운동을 하자고 한다 \n당신의 대답은?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -112,7 +111,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ),
                     ),
                     SizedBox(
-                      height: 220 * ( deviceHeight / standardDeviceHeight),
+                      height: 220 * (deviceHeight / standardDeviceHeight),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -120,11 +119,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffB9CAFE),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
-                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                    textStyle: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold
+                                    )
                                 ),
                                 child: Column(
                                   children: [
@@ -133,20 +136,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
-                                        textAlign: TextAlign.center),
+                                        textAlign: TextAlign.center
+                                    ),
                                     Text('머쓱하게 웃으며 거절한다',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
-                                        textAlign: TextAlign.center),
+                                        textAlign: TextAlign.center
+                                    ),
                                   ],
                                 ),
                                 onPressed: () {
                                   Profile.w += 10;
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question12()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question12()
+                                    ),
                                   );
                                 },
                               )
@@ -155,11 +162,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffFF9281),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
-                                    textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                                    textStyle: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold
+                                    )
                                 ),
                                 child: Column(
                                   children: [
@@ -168,20 +179,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
-                                        textAlign: TextAlign.center),
+                                        textAlign: TextAlign.center
+                                    ),
                                     Text('당장 가자',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         ),
-                                        textAlign: TextAlign.center),
+                                        textAlign: TextAlign.center
+                                    ),
                                   ],
                                 ),
                                 onPressed: () {
                                   Profile.m += 10;
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Question12()),
+                                    MaterialPageRoute(
+                                        builder: (context) => Question12()
+                                    ),
                                   );
                                 },
                               )

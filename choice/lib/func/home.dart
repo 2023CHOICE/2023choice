@@ -61,7 +61,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Listview.activity.add(doc.get('activity'));
         Listview.semester.add(doc.get('semester'));
         Listview.time.add(doc.get('time'));
-
       }
     });
   }
@@ -71,7 +70,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.displayName)
         .collection("testResult")
-        // .orderBy("timestamp", descending: true)
         .get();
 
     for (var doc in result.docs) {
@@ -90,8 +88,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       }
       Result.resultListName.add(list);
     }
-
-    print(Result.resultListName);
   }
 
   Future<void> getHeartList() async {
@@ -193,7 +189,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                  //to set border radius to button
                                   borderRadius: BorderRadius.circular(10)),
                               minimumSize: const Size(30, 30),
                               backgroundColor: Colors.white,
@@ -206,7 +201,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             child: Text(
                               'logout',
                               style: TextStyle(
-                                  fontSize: 11, fontWeight: FontWeight.bold),
+                                  fontSize: 11, fontWeight: FontWeight.bold
+                              ),
                             ),
                             onPressed: () {
                               FirebaseAuth.instance.signOut();
@@ -229,14 +225,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       fontSize: 20,
                                       color: Colors.black,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                                 Text('CHOICE!',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 40,
                                       color: Colors.black,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                               ],
                             ),
                           ),
@@ -257,9 +255,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Character(0, _controllerCenter, imageNum,
-                                        imageNum[0]),
+                                        imageNum[0]
+                                    ),
                                     Character(1, _controllerCenter, imageNum,
-                                        imageNum[1]),
+                                        imageNum[1]
+                                    ),
                                   ],
                                 ),
                               ),
@@ -275,9 +275,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Character(2, _controllerCenter, imageNum,
-                                        imageNum[2]),
+                                        imageNum[2]
+                                    ),
                                     Character(3, _controllerCenter, imageNum,
-                                        imageNum[3]),
+                                        imageNum[3]
+                                    ),
                                   ],
                                 ),
                               )
@@ -296,8 +298,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                  //to set border radius to button
-                                  borderRadius: BorderRadius.circular(10)),
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
                               backgroundColor: Colors.white,
                               foregroundColor: Colors.black,
                               side: const BorderSide(
@@ -309,13 +311,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             child: Text(
                               '테스트 시작하기',
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 20, fontWeight: FontWeight.bold
+                              ),
                             ),
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Question1()),
+                                    builder: (context) => Question1()
+                                ),
                               );
                             },
                           ),
@@ -333,16 +337,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       )
                     ],
                   ),
-                  // child: TextButton(
-                  //   onPressed: () {
-                  //     _controllerCenter.play();
-                  //   },
-                  //   child: Text(
-                  //     '폭죽 터뜨리기',
-                  //     style:
-                  //       TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  //   ),
-                  // ),
                 ),
                 Align(
                   alignment: Alignment.center,
@@ -439,7 +433,6 @@ class _CharacterState extends State<Character> {
             if (this.imageNum[0] == this.imageNum[1] &&
                 this.imageNum[1] == this.imageNum[2] &&
                 this.imageNum[2] == this.imageNum[3]) {
-              print("모두 같음");
               _controllerCenter.play();
             }
           });

@@ -33,8 +33,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   final ScrollController _scrollController = ScrollController();
 
@@ -60,7 +59,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         'list': Question13.listName[i],
       });
     }
-    print("결과 문서 생성 성공!");
   }
 
   Future<void> createHeartDoc(String name) async{
@@ -127,11 +125,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ),
                         Image.network(
                           Question13.picUrl,
-                          height: 150 * (deviceWidth / standardDeviceWidth),
+                          height: 150 * (deviceHeight / standardDeviceHeight),
                           width: 150 * (deviceWidth / standardDeviceWidth),
                         ),
                         SizedBox(
-                          height: 5 * (deviceWidth / standardDeviceWidth),
+                          height: 5 * (deviceHeight / standardDeviceHeight),
                         ),
                         Text('당신은 한동의',
                             style: TextStyle(
@@ -139,7 +137,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               fontSize: 30,
                               color: Colors.black,
                             ),
-                            textAlign: TextAlign.center),
+                            textAlign: TextAlign.center
+                        ),
                         Text(
                           "\"" + Question13.character + "\"", // 과일명
                           style: TextStyle(
@@ -148,7 +147,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             color: Color(Question13.colorNum - 30000),
                           ),
                         ),
-                      ])),
+                      ]
+                    )
+                  ),
                 ),
               ),
             ),
@@ -166,7 +167,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     fontSize: 25,
                     color: Colors.black,
                   ),
-                  textAlign: TextAlign.center),
+                  textAlign: TextAlign.center
+              ),
             ),
           ),
           Expanded(
@@ -193,21 +195,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ),
                         child: Row(children: [
                           SizedBox(
-                              height:
-                                  50 * (deviceHeight / standardDeviceHeight),
-                              width: 30 * (deviceWidth / standardDeviceWidth)),
+                              height: 50 * (deviceHeight / standardDeviceHeight),
+                              width: 30 * (deviceWidth / standardDeviceWidth)
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(2),
                             child: Column(
                               children: [
                                 SizedBox(
-                                    height: 10 *
-                                        (deviceHeight / standardDeviceHeight)),
+                                    height: 10 * (deviceHeight / standardDeviceHeight)
+                                ),
                                 Row(
                                   children: [
                                     SizedBox(
-                                      width: 140 *
-                                          (deviceWidth / standardDeviceWidth),
+                                      width: 140 * (deviceWidth / standardDeviceWidth),
                                       child: Text(
                                         Question13.listName[index],
                                         style: const TextStyle(
@@ -218,19 +219,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 70 *
-                                          (deviceWidth / standardDeviceWidth),
+                                      width: 70 * (deviceWidth / standardDeviceWidth),
                                       child: Container(
                                         child: Text(
-                                          Listview.description1[
-                                              Listview.titleList.indexOf(
-                                                  Question13.listName[index])],
+                                          Listview.description1[Listview.titleList.indexOf(Question13.listName[index])],
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 15,
-                                              color: Color(0xffF28220)),
+                                              color: Color(0xffF28220)
+                                          ),
                                         ),
-                                        //margin: const EdgeInsets.all(10.0),
                                         width: 100.0,
                                         height: 20.0,
                                         decoration: BoxDecoration(
@@ -245,15 +243,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           (deviceWidth / standardDeviceWidth),
                                       child: Container(
                                         child: Text(
-                                          Listview.description2[
-                                              Listview.titleList.indexOf(
-                                                  Question13.listName[index])],
+                                          Listview.description2[Listview.titleList.indexOf(Question13.listName[index])],
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 15,
-                                              color: Color(0xff3FD69F)),
+                                              color: Color(0xff3FD69F)
+                                          ),
                                         ),
-                                        //margin: const EdgeInsets.all(10.0),
                                         width: 100.0,
                                         height: 20.0,
                                         decoration: BoxDecoration(
@@ -264,8 +260,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 30 *
-                                          (deviceWidth / standardDeviceWidth),
+                                      width: 30 * (deviceWidth / standardDeviceWidth),
                                     ),
                                     IconButton(
                                       icon: Icon(
@@ -294,21 +289,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 .add(Question13.listName[index]);
                                           }
                                         });
-
-                                        print(Listview.saved);
                                       },
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                    height: 10 *
-                                        (deviceHeight / standardDeviceHeight)),
+                                    height: 10 * (deviceHeight / standardDeviceHeight)
+                                ),
                               ], //children
                             ),
                           ),
                         ]),
                       );
-                    }),
+                    }
+                  ),
               ),
             ),
           ),
@@ -323,8 +317,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      //to set border radius to button
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
                   side: const BorderSide(
@@ -335,7 +329,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
                 child: Text(
                   '결과 저장하기',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                  ),
                 ),
                 onPressed: () async {
                   await createResultDoc(Question13.character);
@@ -344,7 +341,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   Result.resultTime.add(DateFormat.yMd().add_jm().format(DateTime.now()));
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Profile()),
+                    MaterialPageRoute(
+                        builder: (context) => Profile()
+                    ),
                   );
                 },
               ),

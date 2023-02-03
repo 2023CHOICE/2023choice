@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../func/home.dart';
 import '../func/list.dart';
 import '../func/profile.dart';
-import '2.dart';
 import '4.dart';
 
 class Question3 extends StatelessWidget {
@@ -29,10 +28,9 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int current_index = 0;
   final List<Widget> _children = [Home(), Listview(), Home(), Profile()];
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  void showPopup(context, title, detail, String desc) {
+  void showPopup(context, title, detail, desc) {
     showDialog(
       context: context,
       builder: (context) {
@@ -44,9 +42,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             height: 220,
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: Colors.black, width: 1.0, style: BorderStyle.solid),
+                    color: Colors.black, width: 1.0, style: BorderStyle.solid
+                ),
                 borderRadius: BorderRadius.circular(30),
-                color: Colors.white),
+                color: Colors.white
+            ),
             child: Column(
               children: [
                 const SizedBox(height: 30),
@@ -55,7 +55,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Colors.black
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 Padding(
@@ -63,33 +64,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: Text(
                     detail,
                     maxLines: 3,
-                    style: TextStyle(fontSize: 15, color: Colors.grey[500]),
-                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey[500]
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 60,
+                        width: 100,
                       ),
                       Text(
                         desc,
                         style: const TextStyle(
-                            fontSize: 15,
-                            //fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                          fontSize: 15,
+                          color: Colors.black
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                 ),
                 IconButton(
-                    color: Colors.black,
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
+                  color: Colors.black,
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }
+                ),
               ],
             ),
           ),
@@ -126,13 +131,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               vertical: 30
                           ),
                           icon: Icon(
-                              Icons.home_outlined, color: Colors.black),
+                              Icons.home_outlined,
+                              color: Colors.black
+                          ),
                           iconSize: 30,
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Home()),
+                                  builder: (context) => Home()
+                              ),
                             );
                           },
                         ),
@@ -146,7 +154,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       child: Center(
                         child: Image.asset(
                           'assets/images/bar/bar3.png',
-                          height: 50 * (deviceWidth / standardDeviceWidth),
+                          height: 50 * (deviceHeight / standardDeviceHeight),
                           width: 350 * (deviceWidth / standardDeviceWidth),
                         ),
                       ),
@@ -175,7 +183,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 fontSize: 25,
                                 color: Colors.black,
                               ),
-                              textAlign: TextAlign.center),
+                              textAlign: TextAlign.center
+                          ),
                           TextButton(
                             style: TextButton.styleFrom(
                               primary: Colors.red, // foreground
@@ -188,10 +197,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fontSize: 25,
                                   color: Colors.grey,
                                 ),
-                                textAlign: TextAlign.center),
+                                textAlign: TextAlign.center
+                            ),
                             onPressed: () {
-                              showPopup(context, "MNT란?",
-                                  "Mission And Talent", "한동대학교 문화선교사역단체");
+                              showPopup(context,
+                                  "MNT란?",
+                                  "Mission And Talent",
+                                  "한동대 문화선교사역단체"
+                              );
                             },
                           ),
                         ],
@@ -206,24 +219,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffB9CAFE),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
                                     textStyle: const TextStyle(
-                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                        fontSize: 25, fontWeight: FontWeight.bold)
+                                ),
                                 child: Text('그렇다',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                                 onPressed: () {
                                   Profile.h += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Question4()),
+                                        builder: (context) => Question4()
+                                    ),
                                   );
                                 },
                               )),
@@ -231,27 +248,33 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                     primary: Color(0xffFF9281),
                                     minimumSize: Size(380, 90),
                                     alignment: Alignment.center,
                                     textStyle: const TextStyle(
-                                        fontSize: 25, fontWeight: FontWeight.bold)),
+                                        fontSize: 25, fontWeight: FontWeight.bold
+                                    )
+                                ),
                                 child: Text('아니다',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center
+                                ),
                                 onPressed: () {
                                   Profile.y += 10;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Question4()),
+                                        builder: (context) => Question4()
+                                    ),
                                   );
                                 },
-                              )),
+                              )
+                          ),
                         ],
                       ),
                     ),
