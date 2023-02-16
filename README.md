@@ -24,5 +24,5 @@
 
 # 대표화면, 스크린별 설명
 *  메인 화면 
-<img width="200" alt="https://user-images.githubusercontent.com/103119924/219390878-d7c0267b-11cd-41ee-ae7e-a74bff88d214.png">
+<img width="200" src="https://user-images.githubusercontent.com/103119924/219390878-d7c0267b-11cd-41ee-ae7e-a74bff88d214.png">
 메인화면은 ~ <br/><br/>
