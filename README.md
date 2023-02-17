@@ -35,11 +35,11 @@
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219570782-c61ba491-95dc-4207-bdac-a611257d3766.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219570941-b5741ac2-2a4d-4ba1-92d3-379c4f396f8a.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219570957-ff2a66fe-f132-43c2-a10f-d6d5c3f9b2e5.png">
+<img width="200" src="https://user-images.githubusercontent.com/103638613/219574100-5e52006d-9566-474a-9beb-7944eaf75b67.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219571141-d45cc24e-d378-4d50-b316-1397f370b4f7.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219571159-d2e0f98f-ab89-4520-8f45-fdf365b29def.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219571163-7df7ce0d-7a70-4efe-9af6-51141a0ee726.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219571167-3b502a93-5704-4bd3-9673-9708a5ee391b.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571359-b4acba1b-6327-48a2-b6f3-33211ba486a9.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219573763-4de48827-7b2f-4193-b0fd-2dd11bfdd7e4.png">
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219573775-54573cdd-5245-4799-8324-3a2be6421885.png">
 메인화면에서 테스트 시작하기 화면을 누르면 질문 페이지로 이동한다. 테스트는 13개의 질문들로 이루어져 있고, 각 답변에 가중치를 두어 답변에 따라 결과가 달라지도록 하였다. <br/><br/>
