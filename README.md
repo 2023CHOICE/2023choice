@@ -66,3 +66,9 @@
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219577749-1a9686b6-c09b-4d0c-8a36-2d571c583c12.png">
 <br/><br/>
 
+# 개인별 개발 후기 
+- 장가은 :
+- 이하경 :
+- 박규은 :
+- 김용현 : 
+
