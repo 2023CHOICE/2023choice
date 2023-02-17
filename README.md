@@ -29,18 +29,32 @@
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219570214-46c29fdc-eef3-4fcc-9673-0c42569683c2.png">
 또한, 랜덤으로 변하는 4개의 색깔이 다른 타일을 두어 디자인적 요소를 주었고 4개의 색깔과 숫자가 모두 같으면 폭죽이 터지는 이스터에그를 넣어주었다. <br/><br/>
 *  질문 화면 
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570295-5c0e3131-8212-4748-b32e-1c25fd32899b.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570765-6dc36a66-0d75-492c-b097-36b63ac594bf.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570773-aa7891c2-c728-4dd8-8518-47e44d99e4e7.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570782-c61ba491-95dc-4207-bdac-a611257d3766.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570941-b5741ac2-2a4d-4ba1-92d3-379c4f396f8a.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219570957-ff2a66fe-f132-43c2-a10f-d6d5c3f9b2e5.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571141-d45cc24e-d378-4d50-b316-1397f370b4f7.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571159-d2e0f98f-ab89-4520-8f45-fdf365b29def.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571163-7df7ce0d-7a70-4efe-9af6-51141a0ee726.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571167-3b502a93-5704-4bd3-9673-9708a5ee391b.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571359-b4acba1b-6327-48a2-b6f3-33211ba486a9.png">
-<img width="200" src="https://user-images.githubusercontent.com/103638613/219571375-c4a9d750-4986-47fe-9ac3-cd0637e4dc68.png">
+<figure class="third">
+   <img width="200" src="https://user-images.githubusercontent.com/103638613/219570295-5c0e3131-8212-4748-b32e-1c25fd32899b.png">
+   <img width="200" src="https://user-images.githubusercontent.com/103638613/219570765-6dc36a66-0d75-492c-b097-36b63ac594bf.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219570773-aa7891c2-c728-4dd8-8518-47e44d99e4e7.png">
+figure>
+<figure class="third">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219570782-c61ba491-95dc-4207-bdac-a611257d3766.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219570941-b5741ac2-2a4d-4ba1-92d3-379c4f396f8a.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219570957-ff2a66fe-f132-43c2-a10f-d6d5c3f9b2e5.png">
+figure>
+<figure class="third">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571141-d45cc24e-d378-4d50-b316-1397f370b4f7.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571159-d2e0f98f-ab89-4520-8f45-fdf365b29def.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571163-7df7ce0d-7a70-4efe-9af6-51141a0ee726.png">
+figure>
+<figure class="half">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571167-3b502a93-5704-4bd3-9673-9708a5ee391b.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571359-b4acba1b-6327-48a2-b6f3-33211ba486a9.png">
+figure>
+<figure class="half">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219570295-5c0e3131-8212-4748-b32e-1c25fd32899b.png">
+  <img width="200" src="https://user-images.githubusercontent.com/103638613/219571375-c4a9d750-4986-47fe-9ac3-cd0637e4dc68.png">
+figure>
+
+
+
 메인화면에서 테스트 시작하기 화면을 누르면 질문 페이지로 이동한다. 테스트는 13개의 질문들로 이루어져 있고, 각 답변에 가중치를 두어 답변에 따라 결과가 달라지도록 하였다. <br/><br/>
 *  결과 화면 
 <img width="200" src="https://user-images.githubusercontent.com/103638613/219570295-5c0e3131-8212-4748-b32e-1c25fd32899b.png">
